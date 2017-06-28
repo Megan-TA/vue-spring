@@ -28,5 +28,7 @@ module.exports = {
     "padded-blocks": 0,
     // 不以新行开始的块{前面必须要有1个空格
     "space-before-blocks": [1, "always"],
+    // 允许变量声明未赋值
+    "no-unused-vars": 0,
   }
 }
