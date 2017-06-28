@@ -19,16 +19,23 @@
           </a>
         </div>
       </div>
-      <nav>
+      <nav class="nav">
         <ul class="nav clearfix">
-          <li v-for="(value, key) in navItem" @click="tip(value, key)" :class="{ active: value.active }">{{value.name}}</li>
+          <li v-for="(value, key) in navItem" @click="tip(key)" :class="{ active: key == navItemIndex }">{{value}}</li>
         </ul>
       </nav>
+
+
+      <v-banner></v-banner>
   </div>
+
+
 
 </template>
 
 <script>
+
+  import Banner from 'components/banner/banner.vue';
 
   export default {
 
@@ -38,15 +45,9 @@
 
         return {
 
-            navItem: [
-              {name: '首页', active: true},
-              {name: '商家店铺', active: false},
-              {name: '专场日历', active: false},
-              {name: '限时竞买', active: false},
-              {name: '一口价藏品', active: false},
-              {name: '藏品交流', active: false},
-              {name: '拍品征集', active: false}
-            ]
+            navItemIndex: 0,
+
+            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
 
         };
 
@@ -54,17 +55,15 @@
 
     methods: {
 
-      tip(value, key) {
-
-        this.navItem.forEach(function(element, index) {
-
-          element.active = false;
-
-        });
-
-        value.active = true;
-
+      tip(key) {
+        this.navItemIndex = key;
       }
+
+    },
+
+    components: {
+
+      'v-banner': Banner
 
     }
 
@@ -94,6 +93,7 @@
   .nav
     width: 100%
     background: #f10180
+    height: 24px
     li
       float: left
       padding: 0 20px
