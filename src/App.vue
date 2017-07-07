@@ -27,6 +27,12 @@
 
 
       <v-banner></v-banner>
+
+      <div class="popBox">
+        <div class="pop" ref="pop" @click="transformHeight">
+          xxxx
+        </div>
+      </div>
   </div>
 
 
@@ -56,7 +62,11 @@
 
       tip(key) {
         this.navItemIndex = key;
+      },
+      transformHeight(){
+        this.$refs.pop.style.height = 10 + 'px';
       }
+
 
     },
 
@@ -88,7 +98,6 @@
     height: 100px
     line-height: 100px
 
-
   .nav
     width: 100%
     background: #f10180
@@ -106,7 +115,22 @@
         font-weight: 700
         cursor: default
 
-
+  .popBox
+    width 800px
+    height 800px
+    border 1px solid blue
+    position relative
+    margin 0 auto
+    cursor pointer
+    .pop
+      width 200px
+      height 250px
+      background red
+      position absolute
+      left 50%
+      top 50%
+      margin-left -100px
+      margin-top -125px
 
 
 </style>
