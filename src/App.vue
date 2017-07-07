@@ -30,7 +30,7 @@
 
       <div class="popBox">
         <div class="pop" ref="pop" @click="transformHeight">
-          xxxx
+          验证不管修改弹层里面dom弹层都会自动垂直左右居中
         </div>
       </div>
   </div>
@@ -63,8 +63,8 @@
       tip(key) {
         this.navItemIndex = key;
       },
-      transformHeight(){
-        this.$refs.pop.style.height = 10 + 'px';
+      transformHeight() {
+        this.$refs.pop.style.height = 100 + 'px';
       }
 
 
@@ -84,6 +84,9 @@
 <style lang="stylus">
 
   @import './common/stylus/mixin.styl';
+  
+  body
+    background-color #f5f5f5
 
   .header-inner
     width 100%
@@ -119,18 +122,15 @@
     width 800px
     height 800px
     border 1px solid blue
-    position relative
-    margin 0 auto
     cursor pointer
+    display flex
+    justify-content center
+    align-items center
     .pop
       width 200px
       height 250px
       background red
-      position absolute
-      left 50%
-      top 50%
-      margin-left -100px
-      margin-top -125px
+      text-align center
 
 
 </style>
