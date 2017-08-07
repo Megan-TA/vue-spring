@@ -1,29 +1,24 @@
 <template>
-    <div class="header">
-      <div class="header-inner clearfix">
-        <div class="header-logo-dop">
-          <a target="_blank" href="//www.vip.com/">
-            <img src="//b.appsimg.com/2017/05/31/670/1496219375910.png" alt="全球精选_正品特卖" height="100">
-          </a>
-        </div>
-        <div class="header-vip">
-          <a href="//support.vip.com/insurance/" target="_blank" class="header-vip-icon1">
-            <img src="//b.appsimg.com/2016/06/17/303/1466131264367.png" height="100">
-          </a>
-          <a href="//help.vip.com/commitment.php" target="_blank" class="header-vip-icon2">
-            <img src="//b.appsimg.com/2016/06/17/244/1466131266290.png" height="100">
-          </a>
-          <a href="//help.vip.com/commitment.php" target="_blank" class="header-vip-icon3">
-            <img src="//b.appsimg.com/2016/06/17/530/1466131268726.png" height="100">
-          </a>
-        </div>
-      </div>
-      <nav class="nav">
-        <ul class="nav clearfix">
-          <li v-for="(value, key) in navItem" @click="tip(key)" :class="{ active: key == navItemIndex }">{{value}}</li>
-        </ul>
-      </nav>
-    </div>
+  
+  <header>
+    <nav class="nav-content">
+      <ul class="nav nav-tabs">
+        <li v-for="(value, key) in navItem" @click="tip(key)" :class="{ active: key == navItemIndex }">{{value}}</li>
+      </ul>
+    </nav>
+
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="grid-content bg-purple-dark">1</div>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content bg-purple-dark">2</div>
+      </el-col>
+    </el-row>
+
+
+  </header>
+
 </template>
 
 <script>
@@ -47,8 +42,32 @@
     };
 </script>
 
-<style lang="stylus">
-    
-
-
+<style lang="stylus">  
+  // @import '../../../utils/stylus/mixin.styl';
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
 </style>
