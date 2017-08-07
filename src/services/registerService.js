@@ -4,7 +4,7 @@ class RegisterService {
 
     register(userData) {
         return xhr({
-            url: '/user/goRegister',
+            url: '/auction/user/goRegister',
             data: userData
         });
     };
