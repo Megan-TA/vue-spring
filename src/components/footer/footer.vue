@@ -8,28 +8,22 @@
 
 
 
-<script type="text/ecmascript-6">
+<script>
 
-    props: {
+    props: [],
 
-    },
-
-    data(){
+    data() {
         return {
 
-        }
+        };
     },
-
-    methods: {
-
-    }
 
 </script>
 
 
 
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus">
 
 
 

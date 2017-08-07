@@ -20,12 +20,15 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.json'],
+    extensions: ['', '.js', '.vue', '.json','.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'src': path.resolve(__dirname, '../src'),
-      'common': path.resolve(__dirname, '../src/common'),
-      'components': path.resolve(__dirname, '../src/components')
+      'utils': path.resolve(__dirname, '../src/utils'),
+      'components': path.resolve(__dirname, '../src/components'),
+      'filters': path.resolve(__dirname, '../src/filters'),
+      'services': path.resolve(__dirname, '../src/services'),
+      'vue$': 'vue/dist/vue.js',
     }
   },
   resolveLoader: {

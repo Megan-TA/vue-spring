@@ -22,7 +22,16 @@ module.exports = {
 		port: 8088,
 		assetsSubDirectory: 'static',
 		assetsPublicPath: '/',
-		proxyTable: {},
+		proxyTable: {
+			// 单级路径 多级路径代理失败
+			'/auction': {
+				target: 'http://47.94.131.157:8080',
+				changeOrigin: true,		// 开启跨域
+				pathRewrite: {
+      				'^/auction/': '/auction/'
+    			}
+			}
+		},
 		// CSS Sourcemaps off by default because relative paths are "buggy"
 		// with this option, according to the CSS-Loader README
 		// (https://github.com/webpack/css-loader#sourcemaps)
