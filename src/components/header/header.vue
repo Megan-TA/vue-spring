@@ -9,20 +9,20 @@
 
  
 
-<el-menu theme="dark" :default-active="activeIndex" mode="horizontal">
-  <el-menu-item index="1">首页</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">导航</template>
-    <el-menu-item v-for="(item, num) in navItem" index="2-1">{{num}} {{item}}</el-menu-item>
-  </el-submenu>
-  <el-menu-item index="3">
-    <router-link to="/register">注册</router-link>   
-  </el-menu-item>
-  <el-menu-item index="3">
-    <router-link to="/login">登录</router-link>   
-  </el-menu-item>
-</el-menu>
-<div class="line"></div>
+    <el-menu theme="dark" mode="horizontal">
+      <el-menu-item index="1">首页</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">导航</template>
+        <el-menu-item v-for="(item, num) in navItem" index="2-1">{{num}} {{item}}</el-menu-item>
+      </el-submenu>
+      <el-menu-item index="3" v-show="onoff">
+        <router-link to="/login">登录</router-link>   
+      </el-menu-item>
+      <el-menu-item index="4">
+        <router-link to="/goods">商品</router-link>   
+      </el-menu-item>
+    </el-menu>
+    <div class="line"></div>
 
 
   </header>
@@ -35,8 +35,13 @@
         data() {
 
           return {
-            activeIndex: 0,
-            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
+            // 导航index
+            activeIndex: 0, 
+            // 导航name
+            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集'],
+            //
+            userInfo: window.localStorage.getItem('onoff')
+          
           };
 
         },
@@ -45,7 +50,14 @@
             tip(key) {
               this.navItemIndex = key;
             }
+        },
+
+        computed: {
+          onoff: function() {
+            return this.userInfo === null;
+          }
         }
+
 
     };
 </script>

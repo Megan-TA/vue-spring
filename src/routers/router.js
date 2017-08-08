@@ -1,6 +1,7 @@
 import App from '../App.vue';
 import register from '../components/register/register.vue';
 import login from '../components/login/login.vue';
+import goods from '../components/goods/goods.vue';
 
 export default [
     {
@@ -17,6 +18,14 @@ export default [
         path: '/login',
         name: 'login',
         component: login
+    },
+    {
+        path: '/goods',
+        name: 'goods',
+        component: goods,
+        meta: {
+            required: true
+        }
     }
 ];
 

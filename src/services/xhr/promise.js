@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 14:10:45 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-08 00:54:59
+ * @Last Modified time: 2017-08-08 23:26:03
  */
 
 /* eslint-disable no-undef, no-unused-vars */
@@ -24,17 +24,9 @@ const xhr = ({ method = 'post', url, data = null }) => {
                 resultMsg = res.data.resultMsg,
                 status = res.data.status
             } = res;
-            if (code === '666') {
-                console.warn('调用成功！');
-                resolve(res.data);
-            } else if (code === '500' || code === '400') {
-                console.warn('系统内部原因！');
-            } else {
-                console.warn(resultMsg);
-            };
+            resolve(data);
         })
         .catch(error => {
-            console.error('调用api错误！');
             reject(error);
         });
     });

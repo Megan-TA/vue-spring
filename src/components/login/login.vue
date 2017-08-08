@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-07 23:54:14
+ * @Last Modified time: 2017-08-08 23:30:17
  */
 <template>
     <div class="login">
@@ -16,6 +16,9 @@
              <input type="password" class="form-control" placeholder="密码" v-model="userPassword">
         </div>
         <button class="btn btn-default" @click="loginSubmit">登录</button>
+        <button class="btn btn-default"><router-link to="/register">注册</router-link>   </button>      
+        
+      
     </div>
 </template>
 <script>

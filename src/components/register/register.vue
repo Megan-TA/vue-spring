@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-08 19:27:14
+ * @Last Modified time: 2017-08-08 23:26:56
  */
 <template>
     <div class="register">
@@ -49,14 +49,25 @@ export default {
             registerService
                 .register(data)
                 .then(res => {
-                    this.$message({
-                        'message': '注册成功!',
-                        'type': 'success'
-                    });
-                    this.$router.push({name: 'home'});
+                    if (res.code === '666') {
+                        this.$message({
+                            'message': '注册成功!',
+                            'type': 'success'
+                        });
+                        window.localStorage.setItem('onoff', '1111');
+                        this.$router.push({name: 'home'});
+                    } else {
+                        this.$message({
+                            'message': res.resultMsg,
+                            'type': 'warning'
+                        });
+                    };
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$message({
+                        'message': '注册失败!' + err,
+                        'type': 'error'
+                    });
                 });
         }
     }

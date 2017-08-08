@@ -20,7 +20,18 @@ const router = new VueRouter({
   // mode: 'history',
   routes
 });
-
+// 路由拦截
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(res => res.meta.required)) {
+    if (window.localStorage.getItem('onoff') !== null) {
+      next();
+    } else {
+      next({name: 'register'});
+    }
+  } else {
+    next();
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
