@@ -10,7 +10,7 @@
         </li>
       </ul>
       <ul class="banner-dot">
-          <li v-for="n in 3" class="banner-dot-li" @click="toggleBanner(n)" :class="{ active: n == bannerItemIndex }" >{{n}}</li>
+          <li v-for="n in 3" class="banner-dot-li" @click="toggleBanner(n)" :class="{ active: n == bannerItemIndex }">{{n}}</li>
       </ul>
 
   </div>
@@ -43,7 +43,9 @@
     methods: {
 
       toggleBanner(n) {
+
         this.bannerItemIndex = n;
+
       }
 
     }
@@ -55,7 +57,7 @@
 
 <style lang="stylus">
 
-  @import '../../common/stylus/mixin.styl'
+  @import '../../utils/stylus/mixin.styl'
 
   .banner
     position: relative
