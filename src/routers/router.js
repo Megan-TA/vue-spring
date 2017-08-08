@@ -5,14 +5,17 @@ import login from '../components/login/login.vue';
 export default [
     {
         path: '/',
+        name: 'home',
         component: App
     },
     {
         path: '/register',
+        name: 'register',
         component: register
     },
     {
         path: '/login',
+        name: 'login',
         component: login
     }
 ];

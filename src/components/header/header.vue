@@ -1,20 +1,28 @@
 <template>
   
   <header>
-    <nav class="nav-content">
+    <!-- <nav class="nav-content">
       <ul class="nav nav-tabs">
         <li v-for="(value, key) in navItem" @click="tip(key)" :class="{ active: key == navItemIndex }">{{value}}</li>
       </ul>
-    </nav>
+    </nav> -->
 
-    <el-row :gutter="20">
-      <el-col :span="12">
-        <div class="grid-content bg-purple-dark">1</div>
-      </el-col>
-      <el-col :span="12">
-        <div class="grid-content bg-purple-dark">2</div>
-      </el-col>
-    </el-row>
+ 
+
+<el-menu theme="dark" :default-active="activeIndex" mode="horizontal">
+  <el-menu-item index="1">首页</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">导航</template>
+    <el-menu-item v-for="(item, num) in navItem" index="2-1">{{num}} {{item}}</el-menu-item>
+  </el-submenu>
+  <el-menu-item index="3">
+    <router-link to="/register">注册</router-link>   
+  </el-menu-item>
+  <el-menu-item index="3">
+    <router-link to="/login">登录</router-link>   
+  </el-menu-item>
+</el-menu>
+<div class="line"></div>
 
 
   </header>
@@ -27,7 +35,7 @@
         data() {
 
           return {
-            navItemIndex: 0,
+            activeIndex: 0,
             navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
           };
 
