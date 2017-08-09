@@ -28,6 +28,7 @@ module.exports = {
       'components': path.resolve(__dirname, '../src/components'),
       'filters': path.resolve(__dirname, '../src/filters'),
       'services': path.resolve(__dirname, '../src/services'),
+      'static': path.resolve(__dirname, '../static'),
       'vue$': 'vue/dist/vue.js',
     }
   },

@@ -2,6 +2,7 @@ import App from '../App.vue';
 import register from '../components/register/register.vue';
 import login from '../components/login/login.vue';
 import goods from '../components/goods/goods.vue';
+import auction from '../components/auction/auction.vue';
 
 export default [
     {
@@ -26,6 +27,11 @@ export default [
         meta: {
             required: true
         }
+    },
+    {
+        path: '/auction',
+        name: 'auction',
+        component: auction
     }
 ];
 

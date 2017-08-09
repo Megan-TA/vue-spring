@@ -1,15 +1,8 @@
 <template>
   
   <header>
-    <!-- <nav class="nav-content">
-      <ul class="nav nav-tabs">
-        <li v-for="(value, key) in navItem" @click="tip(key)" :class="{ active: key == navItemIndex }">{{value}}</li>
-      </ul>
-    </nav> -->
-
- 
-
     <el-menu theme="dark" mode="horizontal">
+      <!-- <el-menu-item index="0">欢迎您,</el-menu-item> -->
       <el-menu-item index="1">首页</el-menu-item>
       <el-submenu index="2">
         <template slot="title">导航</template>
@@ -21,10 +14,11 @@
       <el-menu-item index="4">
         <router-link to="/goods">商品</router-link>   
       </el-menu-item>
+      <el-menu-item index="5">
+        <router-link to="/auction">个人拍卖</router-link>   
+      </el-menu-item>
+      <el-menu-item index="6" v-show="!onoff" @click="logout">登出</el-menu-item>
     </el-menu>
-    <div class="line"></div>
-
-
   </header>
 
 </template>
@@ -49,6 +43,10 @@
         methods: {
             tip(key) {
               this.navItemIndex = key;
+            },
+            logout() {
+              window.localStorage.removeItem('onoff');
+              this.$router.push({name: 'home'});
             }
         },
 
@@ -57,7 +55,6 @@
             return this.userInfo === null;
           }
         }
-
 
     };
 </script>
