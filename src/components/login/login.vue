@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-09 20:06:32
+ * @Last Modified time: 2017-08-09 23:51:13
  */
 <template>
     <div class="login">
@@ -10,15 +10,25 @@
             label-width="80px" 
             :label-position="labelPosition">
             <el-form-item label="手机号">
-                <el-input v-model="userPhone" placeholder="请输入手机号" v-validate="'required|numeric'" name="phone"></el-input>
-                <span v-show="errors.has('phone')" class="el-form-item__error">{{ errors.first('phone') }}</span>
+                <el-input 
+                    v-model="userPhone" 
+                    placeholder="请输入手机号" 
+                    name="手机号"
+                    v-validate="'required|numeric|digits:11'"></el-input>
+                <span v-show="errors.has('手机号')" class="el-form-item__error">{{ errors.first('手机号') }}</span>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input type="password" v-model="userPassword" placeholder="请输入密码"></el-input>
+                <el-input 
+                    type="password" 
+                    v-model="userPassword" 
+                    placeholder="请输入密码" 
+                    name="密码"
+                    v-validate="'required|min:6'"></el-input>
+                <span v-show="errors.has('密码')" class="el-form-item__error">{{ errors.first('密码') }}</span>
             </el-form-item>
             <el-row>
                 <el-col :span="5" :offset="15">
-                    <el-button type="primary" @click="loginSubmit">登录</el-button>
+                    <el-button type="primary" @click="validateForm">登录</el-button>
                 </el-col>
                 <el-col :span="4" class="l-h-36">
                     <el-button size="mini">
@@ -35,12 +45,29 @@ export default {
     data() {
         return {
             labelPosition: 'right',
-            'userPhone': '',
-            'userPassword': ''
+            userPhone: '',
+            userPassword: ''
         };
     },
+
     methods: {
+
+        validateForm() {
+            this.$validator
+                .validateAll()
+                .then(res => {
+                    if (res) this.loginSubmit();
+                })
+                .catch(err => {
+                    this.$message({
+                        'message': '验证失败!' + err,
+                        'type': 'error'
+                    });
+                });
+        },
+
         loginSubmit() {
+            
             let userPhone = this.userPhone;
             let userPassword = this.userPassword;
             const data = {

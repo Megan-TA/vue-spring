@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VeeValidate, { Validator } from 'vee-validate';
-import zhCN from 'vee-validate/dist/locale/zh_CN';
+import Validator from './validate/validate';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 
@@ -13,15 +12,11 @@ import routes from './routers/router';
 // 开启debug模式
 Vue.config.debug = true;
 
-Validator.addLocale(zhCN);
-const config = {
-  locale: 'zh_CN'
-};
 
 Vue.use(VueRouter);
 Vue.use(ElementUI);
-Vue.use(VeeValidate, config);
 
+Vue.prototype.$Validator = Validator;
 
 const router = new VueRouter({
   // mode: 'history',

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 14:10:45 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-08 23:26:03
+ * @Last Modified time: 2017-08-09 23:47:39
  */
 
 /* eslint-disable no-undef, no-unused-vars */
@@ -26,8 +26,8 @@ const xhr = ({ method = 'post', url, data = null }) => {
             } = res;
             resolve(data);
         })
-        .catch(error => {
-            reject(error);
+        .catch(err => {
+            reject(err);
         });
     });
 
