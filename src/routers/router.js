@@ -1,16 +1,21 @@
 /*
  * @Author: chen_huang 
  * @Date: 2017-07-31 16:16:42 
- * @Last Modified by:   chen_huang 
- * @Last Modified time: 2017-08-10 16:16:42 
+ * @Last Modified by: chen_huang
+ * @Last Modified time: 2017-08-10 16:39:20
  */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
 import App from '../App.vue';
 import register from '../components/register/register.vue';
 import login from '../components/login/login.vue';
 import goods from '../components/goods/goods.vue';
 import auction from '../components/auction/auction.vue';
 
-export default [
+Vue.use(VueRouter);
+
+const routes = [
     {
         path: '/',
         component: App,
@@ -51,3 +56,21 @@ export default [
     }
 ];
 
+const router = new VueRouter({
+  // mode: 'history',
+  routes
+});
+// 路由拦截
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(res => res.meta.required)) {
+    if (window.sessionStorage.getItem('userInfo') !== null) {
+      next();
+    } else {
+      next({name: 'register'});
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
