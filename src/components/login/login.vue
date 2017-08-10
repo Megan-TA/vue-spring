@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-09 23:51:13
+ * @Last Modified time: 2017-08-10 15:23:24
  */
 <template>
     <div class="login">
@@ -13,18 +13,18 @@
                 <el-input 
                     v-model="userPhone" 
                     placeholder="请输入手机号" 
-                    name="手机号"
-                    v-validate="'required|numeric|digits:11'"></el-input>
-                <span v-show="errors.has('手机号')" class="el-form-item__error">{{ errors.first('手机号') }}</span>
+                    name="userPhone"
+                    v-validate="'required|mobile|digits:11'"></el-input>
+                <span v-show="errors.has('userPhone')" class="el-form-item__error">{{ errors.first('userPhone') }}</span>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input 
                     type="password" 
                     v-model="userPassword" 
                     placeholder="请输入密码" 
-                    name="密码"
-                    v-validate="'required|min:6'"></el-input>
-                <span v-show="errors.has('密码')" class="el-form-item__error">{{ errors.first('密码') }}</span>
+                    name="userPassword"
+                    v-validate="'required|min:6|max:20|alpha_num'"></el-input>
+                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
             </el-form-item>
             <el-row>
                 <el-col :span="5" :offset="15">
@@ -41,6 +41,7 @@
 </template>
 <script>
 import loginService from '../../services/loginService';
+import bus from '../common';
 export default {
     data() {
         return {
@@ -82,8 +83,14 @@ export default {
                             'message': '登录成功！',
                             'type': 'success'
                         });
-                        window.localStorage.setItem('onoff', '1111');
-                        this.$router.push({name: 'home'}); 
+                        // 像header传递数据
+                        bus.$emit('userSignIn', 'test');
+                        this.$router.push({
+                            name: 'home',
+                            query: {
+                                uerId: '111'
+                            }
+                        }); 
                     } else {
                         this.$message({
                             'message': res.resultMsg,

@@ -1,3 +1,9 @@
+/*
+ * @Author: chen_huang 
+ * @Date: 2017-07-30 16:16:27 
+ * @Last Modified by: chen_huang
+ * @Last Modified time: 2017-08-10 16:22:38
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Validator from './validate/validate';
@@ -25,7 +31,7 @@ const router = new VueRouter({
 // 路由拦截
 router.beforeEach((to, from, next) => {
   if (to.matched.some(res => res.meta.required)) {
-    if (window.localStorage.getItem('onoff') !== null) {
+    if (window.sessionStorage.getItem('userInfo') !== null) {
       next();
     } else {
       next({name: 'register'});

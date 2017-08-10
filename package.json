@@ -14,7 +14,6 @@
     "babel-runtime": "^6.0.0",
     "better-scroll": "^0.1.11",
     "element-ui": "^1.4.1",
-    "vee-validate": "^2.0.0-rc.9",
     "vue": "^2.1.10",
     "vue-router": "^2.1.0"
   },
@@ -54,6 +53,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "url-loader": "^0.5.7",
+    "vee-validate": "^2.0.0-beta.17",
     "vue-loader": "^10.0.0",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.1.0",

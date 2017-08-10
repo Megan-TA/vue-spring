@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-10 01:15:01
+ * @Last Modified time: 2017-08-10 16:34:50
  */
 <template>
     <div class="register">
@@ -10,29 +10,30 @@
             <el-form-item label="手机号">
                 <el-input 
                     v-model="userPhone" 
-                    v-validate="'required|numeric|digits:11'"
+                    v-validate="'required|mobile|digits:11'"
                     name="userPhone"></el-input>
                 <span v-show="errors.has('userPhone')" class="el-form-item__error">{{ errors.first('userPhone') }}</span>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input 
+                <input  
                     type="password" 
                     v-model="userPassword"
                     v-validate="'required|min:6|max:20|alpha_num'"
-                    name="userPassword"></el-input>
+                    name="userPassword"
+                    class="el-input__inner">
                 <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
             </el-form-item>
             <el-form-item label="确认密码">
-                <el-input 
+                <input  
                     type="password" 
                     v-model="userConfirmPasswod"
-                    v-validate="'required|confirmed:userPassword'"
-                    data-vv-as="密码"
-                    name="userConfirmPasswod"></el-input>
+                    v-validate="'confirmed:userPassword'"
+                    name="userConfirmPasswod"
+                    class="el-input__inner">
                 <span v-show="errors.has('userConfirmPasswod')" class="el-form-item__error">{{ errors.first('userConfirmPasswod') }}</span>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="registerSubmit">立即注册</el-button>
+                <el-button type="primary" @click="validateForm">立即注册</el-button>
             </el-form-item>
         </el-form>
     </div> 
@@ -87,8 +88,13 @@ export default {
                             'message': '注册成功!',
                             'type': 'success'
                         });
-                        window.localStorage.setItem('onoff', '1111');
-                        this.$router.push({name: 'home'});
+                        this.$emit('userSignIn', 'test');
+                        this.$router.push({
+                            name: 'home',
+                            query: {
+                                uerId: '111'
+                            }
+                        });
                     } else {
                         this.$message({
                             'message': res.resultMsg,

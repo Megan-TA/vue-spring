@@ -26,4 +26,25 @@ const config = {
 
 Vue.use(VeeValidate, config);
 
+// 自定义验证规则
+Validator.extend('mobile', {
+  messages: {
+    zh_CN: (veeField) => '手机号 输入不正确,且精确到11位数'
+  },
+  validate: value => {
+   let result = /^1[34578]\d{9}$/.test(value);
+   return result;
+  }
+});
+Validator.extend('Chinese', {
+  messages: {
+    zh_CN: (veeField) => '只允许输入中文、英文、字母和-'
+  },
+  validate: value => {
+   let result = /^[\u4e00-\u9fa5a-zA-Z-]+$/.test(value);
+   return result;
+  }
+});
+
+
 export default Validator; 
