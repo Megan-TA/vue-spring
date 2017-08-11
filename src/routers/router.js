@@ -2,16 +2,17 @@
  * @Author: chen_huang 
  * @Date: 2017-07-31 16:16:42 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-10 16:39:20
+ * @Last Modified time: 2017-08-11 15:30:13
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from '../App.vue';
-import register from '../components/register/register.vue';
-import login from '../components/login/login.vue';
-import goods from '../components/goods/goods.vue';
-import auction from '../components/auction/auction.vue';
+import register from '../components/register/register';
+import login from '../components/login/login';
+import goods from '../components/goods/goods';
+import auction from '../components/auction/auction';
+import auctionDetails from '../components/auction/auctionDetails/auctionDetails';
 
 Vue.use(VueRouter);
 
@@ -44,15 +45,27 @@ const routes = [
     {
         path: '/goods',
         name: 'goods',
-        component: goods,
-        meta: {
-            required: true
-        }
+        component: goods
+        // meta: {
+        //     required: true
+        // }
     },
     {
         path: '/auction',
         name: 'auction',
         component: auction
+        // children: [
+        //     {
+        //         path: '/auction/auctionID',
+        //         name: 'auctionDetails',
+        //         component: auctionDetails
+        //     }
+        // ]
+    },
+    {
+        path: '/auctionDetails',
+        name: 'auctionDetails',
+        component: auctionDetails
     }
 ];
 

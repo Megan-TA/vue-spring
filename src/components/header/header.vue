@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-10 16:31:19
+ * @Last Modified time: 2017-08-11 13:37:18
  */
 <template>
   
@@ -47,8 +47,8 @@ import bus from '../common';
           return {
             // 登录登出状态控制
             userInfo: window.sessionStorage.getItem('userInfo'),
-            // 对话框控制开关
-            dialogVisible: false,
+            // // 对话框控制开关
+            // dialogVisible: false,
             // 导航index
             activeIndex: 0, 
             // 导航name

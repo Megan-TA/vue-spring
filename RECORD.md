@@ -1,5 +1,5 @@
 # 记录开发遇到的坑
->
+> 1. 服务代理跨域
 -------------
 * axios本身不支持跨域 度娘说要用本地代理 好 修改config/index.js的proxyTable中间件 
 >
@@ -25,3 +25,5 @@ proxyTable: {
     }      
 }
 ```
+> 2. vee-validate与element-ui bug
+>> el-input 标签下 vee-validate的confirmed失效  改用input解决 
