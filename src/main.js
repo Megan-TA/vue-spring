@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:16:27 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 11:27:41
+ * @Last Modified time: 2017-08-13 22:33:10
  */
 import Vue from 'vue';
 import Validator from './validate/validate';

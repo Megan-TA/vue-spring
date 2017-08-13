@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-31 16:16:42 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-12 10:30:42
+ * @Last Modified time: 2017-08-13 22:33:46
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';

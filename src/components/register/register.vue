@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 20:16:45
+ * @Last Modified time: 2017-08-13 22:33:35
  */
 <template>
     <div class="register">

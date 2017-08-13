@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 20:12:59
+ * @Last Modified time: 2017-08-13 22:36:35
  */
 <template>
   
@@ -33,14 +33,14 @@
 // import bus from '../common';
     export default {
 
-        mounted() {
+        created() {
           // 接收register传递的数据
           // bus.$on('userSignIn', userInfo => {
-          //     window.sessionStorage.setItem('userInfo', userInfo);
+          //     window.localStorage.setItem('userInfo', userInfo);
           //     this.$store.state.headerModule.userInfo = userInfo;
           // });
 
-          this.userInfo = window.sessionStorage.getItem('userInfo');
+          this.userInfo = window.localStorage.getItem('userInfo');
 
         },
 
@@ -63,7 +63,7 @@
               this.navItemIndex = key;
             },
             logout() {
-              window.sessionStorage.removeItem('userInfo');
+              window.localStorage.removeItem('userInfo');
               this.userInfo = null;
               this.$router.replace({name: 'home'});
             },
@@ -74,7 +74,7 @@
         },
         // computed: {
         //   onoff: function() {
-        //     return !!window.sessionStorage.getItem('userInfo');
+        //     return !!window.localStorage.getItem('userInfo');
         //   }
         // },
         watch: {

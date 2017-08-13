@@ -2,14 +2,14 @@
  * @Author: chen_huang 
  * @Date: 2017-08-12 10:19:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-12 11:40:24
+ * @Last Modified time: 2017-08-13 21:36:10
  * 拍品描述
  */
 <template>
     <div class="describe">
         <h3>拍品描述</h3>
         <p>{{ dataInfo.info }}</p>
-        <img :src="item" alt="" v-for="item in dataInfo.imgList">
+        <img :src="item" alt="" v-for="item in dataInfo.imgList" :key="item">
     </div>
 </template>
 <script>

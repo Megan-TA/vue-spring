@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 20:10:55
+ * @Last Modified time: 2017-08-13 22:34:42
  */
 <template>
     <div class="login">
@@ -71,6 +71,7 @@ export default {
             
             let userPhone = this.userPhone;
             let userPassword = this.userPassword;
+            let paramsFrom = this.$route.query && this.$route.query.from;
             const data = {
                 'userPhone': userPhone,
                 'userPassword': userPassword
@@ -86,13 +87,28 @@ export default {
 
                         // bus.$emit('userSignIn', 'test');
                         // this.$store.commit('getUserInfo');
-                        window.sessionStorage.setItem('userInfo', 11);
-                        this.$router.push({
-                            name: 'home',
-                            query: {
-                                uerId: '111'
-                            }
-                        }); 
+                        window.localStorage.setItem('userInfo', 11);
+
+                        if (paramsFrom) {
+                            // 拍卖详情页点击登录跳转回详情页
+                            if (paramsFrom === 'auctionDetails') {
+                                this.$router.push({
+                                    name: 'auctionDetailsBids',
+                                    query: {
+                                        uerId: '111'
+                                    }
+                                }); 
+                            };
+                        } else {
+                            this.$router.push({
+                                name: 'home',
+                                query: {
+                                    uerId: '111'
+                                }
+                            }); 
+                        };
+
+                        
                     } else {
                         this.$message({
                             'message': res.resultMsg,

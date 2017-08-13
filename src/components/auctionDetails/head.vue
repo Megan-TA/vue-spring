@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 14:35:38 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-11 18:02:18
+ * @Last Modified time: 2017-08-13 22:16:49
  * 拍卖详情页上半部分
  */
 <template>
@@ -43,11 +43,19 @@
                                 当前价<span class="auctionDetaills-item-price">￥350</span>
                             </dd>
                         </dl>
-                        <div class="auctionDetaills-item-slogin">
-                            拥有出价资格且登录后才可以出价或设置代理价<router-link to="/login" class="login">点击登录</router-link>
+                        <div class="auctionDetaills-item-slogin" v-if="userInfo">
+                            拥有出价资格且登录后才可以出价或设置代理价
+                            <router-link 
+                                :to="{
+                                    name: 'login',
+                                    query: {
+                                        from: 'auctionDetails'
+                                    }
+                                }" class="l``ogin">点击登录</router-link>
                         </div>
                         <div class="auctionDetaills-item-payment">
-                            <i class="el-icon-edit"></i>
+                            <i class="icon-wx"></i><span>微信支付</span>
+                            <i class="icon-ali"></i><span>支付宝支付</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +68,7 @@ export default {
   props: [],
   data () {
     return {
-
+        userInfo: window.sessionStorage.getItem('userInfo') == null
     };
   }
 };
@@ -116,6 +124,9 @@ export default {
         vertical-align: middle;
         padding-right: 50px;
     
-    
+    .auctionDetaills-item-payment
+        i,span
+            vertical-align top
+            margin-right 8px
     
 </style>
