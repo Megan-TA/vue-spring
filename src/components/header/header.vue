@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-11 13:37:18
+ * @Last Modified time: 2017-08-13 20:12:59
  */
 <template>
   
@@ -30,23 +30,24 @@
 </template>
 
 <script>
-import bus from '../common';
+// import bus from '../common';
     export default {
 
         mounted() {
           // 接收register传递的数据
-          bus.$on('userSignIn', userInfo => {
-              window.sessionStorage.setItem('userInfo', userInfo);
-              this.userInfo = userInfo;
-          });
+          // bus.$on('userSignIn', userInfo => {
+          //     window.sessionStorage.setItem('userInfo', userInfo);
+          //     this.$store.state.headerModule.userInfo = userInfo;
+          // });
+
+          this.userInfo = window.sessionStorage.getItem('userInfo');
 
         },
 
         data() {
 
           return {
-            // 登录登出状态控制
-            userInfo: window.sessionStorage.getItem('userInfo'),
+            userInfo: null,
             // // 对话框控制开关
             // dialogVisible: false,
             // 导航index
@@ -65,6 +66,10 @@ import bus from '../common';
               window.sessionStorage.removeItem('userInfo');
               this.userInfo = null;
               this.$router.replace({name: 'home'});
+            },
+
+            test() {
+                this.$store.commit('increment');
             }
         },
         // computed: {
@@ -77,6 +82,7 @@ import bus from '../common';
               // window.alert(to);
           }
         }
+
 
     };
 </script>

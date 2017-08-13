@@ -52,7 +52,7 @@
 <style lang="stylus">
 
   .banner-content
-    width 700px
+    width 100%
     margin 0 auto
 
   

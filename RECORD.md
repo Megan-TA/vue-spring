@@ -27,3 +27,5 @@ proxyTable: {
 ```
 > 2. vee-validate与element-ui bug
 >> el-input 标签下 vee-validate的confirmed失效  改用input解决 
+
+> 3. vuex 刷新数据恢复初始值  无法长时间记忆  不适合注册登录状态的记忆

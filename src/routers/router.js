@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-31 16:16:42 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-11 15:30:13
+ * @Last Modified time: 2017-08-12 10:30:42
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -12,7 +12,10 @@ import register from '../components/register/register';
 import login from '../components/login/login';
 import goods from '../components/goods/goods';
 import auction from '../components/auction/auction';
-import auctionDetails from '../components/auction/auctionDetails/auctionDetails';
+// 拍品详情页
+import auctionDetails from '../components/auctionDetails/auctionDetails';
+import bids from '../components/auctionDetails/bids';
+import describe from '../components/auctionDetails/describe';
 
 Vue.use(VueRouter);
 
@@ -65,7 +68,19 @@ const routes = [
     {
         path: '/auctionDetails',
         name: 'auctionDetails',
-        component: auctionDetails
+        component: auctionDetails,
+        children: [
+            {
+                path: 'bids',
+                name: 'auctionDetailsBids',
+                component: bids
+            },
+            {
+                path: 'describe',
+                name: 'auctionDetailsDescribe',
+                component: describe
+            }
+        ]
     }
 ];
 

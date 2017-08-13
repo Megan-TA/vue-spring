@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-10 15:23:24
+ * @Last Modified time: 2017-08-13 20:10:55
  */
 <template>
     <div class="login">
@@ -41,7 +41,7 @@
 </template>
 <script>
 import loginService from '../../services/loginService';
-import bus from '../common';
+// import bus from '../common';
 export default {
     data() {
         return {
@@ -83,8 +83,10 @@ export default {
                             'message': '登录成功！',
                             'type': 'success'
                         });
-                        // 像header传递数据
-                        bus.$emit('userSignIn', 'test');
+
+                        // bus.$emit('userSignIn', 'test');
+                        // this.$store.commit('getUserInfo');
+                        window.sessionStorage.setItem('userInfo', 11);
                         this.$router.push({
                             name: 'home',
                             query: {

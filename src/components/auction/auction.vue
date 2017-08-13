@@ -2,7 +2,8 @@
  * @Author: chen_huang 
  * @Date: 2017-08-08 13:16:31 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-11 16:22:57
+ * @Last Modified time: 2017-08-12 17:27:06
+ * 拍卖物品列表页
  */
 <template>
     <div>
@@ -20,7 +21,7 @@
                     <el-card :body-style="{ padding: '0px' }">
                     <router-link class="auction-item-imageBox" 
                                 :to="{ 
-                                    name: 'auctionDetails', 
+                                    name: 'auctionDetailsBids', 
                                     query: {
                                         auctionID: value.auctionID 
                                     }
