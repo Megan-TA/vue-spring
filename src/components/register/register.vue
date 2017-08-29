@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:33:35
+ * @Last Modified time: 2017-08-29 22:30:51
  */
 <template>
     <div class="register">
@@ -39,46 +39,45 @@
     </div> 
 </template>
 <script>
-import registerService from '../../services/registerService';
+import registerService from '../../services/registerService'
 export default {
 
     props: [],
 
-    data() {
+    data () {
         return {
             userPhone: '',
             userPassword: '',
             userConfirmPasswod: '',
             verifyCode: '0000'
-        };
+        }
     },
 
     methods: {
 
-        validateForm() {
+        validateForm () {
             this.$validator.validateAll()
                 .then(res => {
-                    if (res) this.registerSubmit();
+                    if (res) this.registerSubmit()
                 })
                 .catch(err => {
                     this.$message({
                         'message': '验证失败' + err,
                         'type': 'error'
-                    });
-                });
+                    })
+                })
         },
 
-        registerSubmit() {
-
-            let userPhone = this.userPhone;
-            let userPassword = this.userPassword;
-            let verifyCode = this.verifyCode;
+        registerSubmit () {
+            let userPhone = this.userPhone
+            let userPassword = this.userPassword
+            let verifyCode = this.verifyCode
 
             const data = {
                 'userPhone': userPhone,
                 'userPassword': userPassword,
                 'verifyCode': verifyCode
-            };
+            }
 
             registerService
                 .register(data)
@@ -87,31 +86,31 @@ export default {
                         this.$message({
                             'message': '注册成功!',
                             'type': 'success'
-                        });
-                        window.sessionStorage.setItem('userInfo', 11);
+                        })
+                        window.sessionStorage.setItem('userInfo', 11)
                         this.$router.push({
                             name: 'home',
                             query: {
                                 uerId: '111'
                             }
-                        });
+                        })
                     } else {
                         this.$message({
                             'message': res.resultMsg,
                             'type': 'warning'
-                        });
+                        })
                     };
                 })
                 .catch(err => {
                     this.$message({
                         'message': '注册失败!' + err,
                         'type': 'error'
-                    });
-                });
+                    })
+                })
         }
     }
- 
-};
+
+}
 </script>
 <style lang="stylus">
     .register

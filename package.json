@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "lintfix": "eslint --fix .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
     "axios": "^0.16.2",

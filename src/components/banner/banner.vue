@@ -13,38 +13,33 @@
 </template>
 
 <script>
-
   export default {
 
-    props: [],
+      props: [],
 
-    data() {
+      data () {
+          return {
 
-        return {
+              bannerItemIndex: 1,
 
-          bannerItemIndex: 1,
+              bannerItem: [
+                  '//pic.jucangtianxia.com/N/201706/65/65950e16684855644c7f552374b25adb.jpg',
+                  '//pic.jucangtianxia.com/N/201706/75/75951c1981ed7231cbb20558e8244dd8.jpg',
+                  '//pic.jucangtianxia.com/N/201706/45/4594b4124319894507702d303f4eed7b.jpg'
+              ]
 
-          bannerItem: [
-            '//pic.jucangtianxia.com/N/201706/65/65950e16684855644c7f552374b25adb.jpg',
-            '//pic.jucangtianxia.com/N/201706/75/75951c1981ed7231cbb20558e8244dd8.jpg',
-            '//pic.jucangtianxia.com/N/201706/45/4594b4124319894507702d303f4eed7b.jpg'
-          ]
+          }
+      },
 
-        };
+      methods: {
 
-    },
-
-    methods: {
-
-      toggleBanner(n) {
-
-        this.bannerItemIndex = n;
+          toggleBanner (n) {
+              this.bannerItemIndex = n
+          }
 
       }
 
-    }
-
-  };
+  }
 
 </script>
 
@@ -52,7 +47,7 @@
 <style lang="stylus">
 
   .banner-content
-    width 100%
+    width 700px
     margin 0 auto
 
   

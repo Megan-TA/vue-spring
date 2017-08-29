@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-08 13:16:31 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-12 17:27:06
+ * @Last Modified time: 2017-08-29 22:34:53
  * 拍卖物品列表页
  */
 <template>
@@ -42,53 +42,53 @@
 
 </template>
 <script>
-import header from '../header/header';
+import header from '../header/header'
 export default {
-  data () {
-    return {
-         currentDate: new Date(),
-         dataList: [
-             {
-                 'auctionID': '110',
-                 'title': '和田白玉飞黄腾达',
-                 'img': 'static/images/test.jpg',
-                 'startingPrice': '￥10',
-                 'currentPrice': '￥12',
-                 'endTime': '1小时20分'
-             },
-             {
-                 'auctionID': '111',
-                 'title': '和田仔料观音',
-                 'img': 'static/images/test.jpg',
-                 'startingPrice': '￥1666',
-                 'currentPrice': '￥1999',
-                 'endTime': '1小时20分'
-             },
-             {
-                 'auctionID': '112',
-                 'title': '和田白玉挂件佛',
-                 'img': 'static/images/test.jpg',
-                 'startingPrice': '￥50',
-                 'currentPrice': '￥60',
-                 'endTime': '1小时10分'
-             },
-             {
-                 'auctionID': '114',
-                 'title': '和田白玉挂件佛',
-                 'img': 'static/images/test.jpg',
-                 'startingPrice': '￥50',
-                 'currentPrice': '￥60',
-                 'endTime': '1小时10分'
-             }
-         ]
-    };
-  },
+    data () {
+        return {
+            currentDate: new Date(),
+            dataList: [
+                {
+                    'auctionID': '110',
+                    'title': '和田白玉飞黄腾达',
+                    'img': 'static/images/test.jpg',
+                    'startingPrice': '￥10',
+                    'currentPrice': '￥12',
+                    'endTime': '1小时20分'
+                },
+                {
+                    'auctionID': '111',
+                    'title': '和田仔料观音',
+                    'img': 'static/images/test.jpg',
+                    'startingPrice': '￥1666',
+                    'currentPrice': '￥1999',
+                    'endTime': '1小时20分'
+                },
+                {
+                    'auctionID': '112',
+                    'title': '和田白玉挂件佛',
+                    'img': 'static/images/test.jpg',
+                    'startingPrice': '￥50',
+                    'currentPrice': '￥60',
+                    'endTime': '1小时10分'
+                },
+                {
+                    'auctionID': '114',
+                    'title': '和田白玉挂件佛',
+                    'img': 'static/images/test.jpg',
+                    'startingPrice': '￥50',
+                    'currentPrice': '￥60',
+                    'endTime': '1小时10分'
+                }
+            ]
+        }
+    },
 
-  components: {
-      'v-header': header
-  }
+    components: {
+        'v-header': header
+    }
 
-};
+}
 </script>
 <style lang="stylus" scoped>
     .auction

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-12 10:04:24 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-12 12:00:50
+ * @Last Modified time: 2017-08-29 22:34:15
  */
 <template>
     <div class="bids">
@@ -32,7 +32,7 @@
 <script>
 export default {
     props: [],
-    data() {
+    data () {
         return {
             tableData: [{
                 date: '2016-05-02',
@@ -43,9 +43,9 @@ export default {
                 name: '王小虎',
                 bid: '￥110'
             }]
-    };
+        }
+    }
 }
-};
 </script>
 <style lang="stylus">
     .bids

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:30:08 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-12 17:26:48
+ * @Last Modified time: 2017-08-29 22:39:53
  * 拍卖详情页下方主体部分
  */
 <template>
@@ -28,13 +28,12 @@
 </template>
 <script>
 export default {
-  props: [],
-  data () {
-    return {
-
-    };
-  }
-};
+    props: [],
+    data () {
+        return {
+        }
+    }
+}
 </script>
 <style lang="stylus" scoped>
 

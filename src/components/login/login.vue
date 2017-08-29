@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:34:42
+ * @Last Modified time: 2017-08-29 22:36:43
  */
 <template>
     <div class="login">
@@ -40,42 +40,41 @@
     </div>
 </template>
 <script>
-import loginService from '../../services/loginService';
+import loginService from '../../services/loginService'
 // import bus from '../common';
 export default {
-    data() {
+    data () {
         return {
             labelPosition: 'right',
             userPhone: '',
             userPassword: ''
-        };
+        }
     },
 
     methods: {
 
-        validateForm() {
+        validateForm () {
             this.$validator
                 .validateAll()
                 .then(res => {
-                    if (res) this.loginSubmit();
+                    if (res) this.loginSubmit()
                 })
                 .catch(err => {
                     this.$message({
                         'message': '验证失败!' + err,
                         'type': 'error'
-                    });
-                });
+                    })
+                })
         },
 
-        loginSubmit() {
-            
-            let userPhone = this.userPhone;
-            let userPassword = this.userPassword;
-            let paramsFrom = this.$route.query && this.$route.query.from;
+        loginSubmit () {
+            let userPhone = this.userPhone
+            let userPassword = this.userPassword
+            let paramsFrom = this.$route.query && this.$route.query.from
             const data = {
                 'userPhone': userPhone,
                 'userPassword': userPassword
-            };
+            }
             loginService
                 .login(data)
                 .then(res => {
@@ -83,11 +82,11 @@ export default {
                         this.$message({
                             'message': '登录成功！',
                             'type': 'success'
-                        });
+                        })
 
                         // bus.$emit('userSignIn', 'test');
                         // this.$store.commit('getUserInfo');
-                        window.localStorage.setItem('userInfo', 11);
+                        window.localStorage.setItem('userInfo', 11)
 
                         if (paramsFrom) {
                             // 拍卖详情页点击登录跳转回详情页
@@ -97,34 +96,32 @@ export default {
                                     query: {
                                         uerId: '111'
                                     }
-                                }); 
-                            };
+                                })
+                            }
                         } else {
                             this.$router.push({
                                 name: 'home',
                                 query: {
                                     uerId: '111'
                                 }
-                            }); 
+                            })
                         };
-
-                        
                     } else {
                         this.$message({
                             'message': res.resultMsg,
                             'type': 'warning'
-                        });
+                        })
                     }
                 })
                 .catch(err => {
                     this.$message({
                         'message': '注册失败!' + err,
                         'type': 'error'
-                    });
-                });
+                    })
+                })
         }
     }
-};
+}
 </script>
 <style lang="stylus">
     .login

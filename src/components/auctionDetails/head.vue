@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 14:35:38 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:16:49
+ * @Last Modified time: 2017-08-29 22:33:52
  * 拍卖详情页上半部分
  */
 <template>
@@ -65,13 +65,13 @@
 </template>
 <script>
 export default {
-  props: [],
-  data () {
-    return {
-        userInfo: window.sessionStorage.getItem('userInfo') == null
-    };
-  }
-};
+    props: [],
+    data () {
+        return {
+            userInfo: window.sessionStorage.getItem('userInfo') == null
+        }
+    }
+}
 </script>
 <style lang="stylus" scoped>
     .auctionDetaills 

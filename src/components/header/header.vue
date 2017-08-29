@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:36:35
+ * @Last Modified time: 2017-08-29 22:36:06
  */
 <template>
   
@@ -33,43 +33,40 @@
 // import bus from '../common';
     export default {
 
-        created() {
+        created () {
           // 接收register传递的数据
           // bus.$on('userSignIn', userInfo => {
           //     window.localStorage.setItem('userInfo', userInfo);
           //     this.$store.state.headerModule.userInfo = userInfo;
           // });
 
-          this.userInfo = window.localStorage.getItem('userInfo');
-
+            this.userInfo = window.localStorage.getItem('userInfo')
         },
 
-        data() {
-
-          return {
-            userInfo: null,
+        data () {
+            return {
+                userInfo: null,
             // // 对话框控制开关
             // dialogVisible: false,
             // 导航index
-            activeIndex: 0, 
+                activeIndex: 0,
             // 导航name
-            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
-          };
-
+                navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
+            }
         },
 
         methods: {
-            tip(key) {
-              this.navItemIndex = key;
+            tip (key) {
+                this.navItemIndex = key
             },
-            logout() {
-              window.localStorage.removeItem('userInfo');
-              this.userInfo = null;
-              this.$router.replace({name: 'home'});
+            logout () {
+                window.localStorage.removeItem('userInfo')
+                this.userInfo = null
+                this.$router.replace({name: 'home'})
             },
 
-            test() {
-                this.$store.commit('increment');
+            test () {
+                this.$store.commit('increment')
             }
         },
         // computed: {
@@ -78,13 +75,11 @@
         //   }
         // },
         watch: {
-          '$route' (to, from) {
+            '$route' (to, from) {
               // window.alert(to);
-          }
+            }
         }
-
-
-    };
+    }
 </script>
 
 <style lang="stylus">  

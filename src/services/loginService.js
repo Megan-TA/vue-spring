@@ -1,14 +1,14 @@
-import xhr from './xhr/promise';
+import xhr from './xhr/promise'
 
 class LoginService {
 
-    login(userData) {
+    login (userData) {
         return xhr({
             url: '/auction/user/goLogin',
             data: userData
-        });
+        })
     };
 
 }
 
-export default new LoginService();
+export default new LoginService()

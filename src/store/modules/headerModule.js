@@ -5,10 +5,8 @@ export default {
     mutations: {
         // getUserInfo(state) {
         //     window.sessionStorage.setItem('userInfo', 11);
-        //     state.userInfo = window.sessionStorage.getItem('userInfo');          
+        //     state.userInfo = window.sessionStorage.getItem('userInfo');
         // }
     }
-};
-
-
+}
 

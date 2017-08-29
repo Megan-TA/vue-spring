@@ -9,15 +9,6 @@
 
 
 <script>
-
-    props: [],
-
-    data() {
-        return {
-
-        };
-    },
-
 </script>
 
 

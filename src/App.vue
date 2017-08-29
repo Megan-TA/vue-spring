@@ -11,32 +11,27 @@
 </template>
 
 <script>
-
-  import Header from 'components/header/header.vue';
-  import Banner from 'components/banner/banner.vue';
+  import Header from 'components/header/header.vue'
+  import Banner from 'components/banner/banner.vue'
 
   export default {
 
-    props: [],
+      props: [],
 
-    data() {
+      data () {
+          return {
 
-        return {
+          }
+      },
 
+      components: {
 
-        };
+          'v-header': Header,
+          'v-banner': Banner
 
-    },
+      }
 
-
-    components: {
-
-      'v-header': Header,
-      'v-banner': Banner
-
-    }
-
-  };
+  }
 
 </script>
 

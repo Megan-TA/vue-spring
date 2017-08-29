@@ -1,16 +1,15 @@
 /*
- * @Author: chen_huang 
- * @Date: 2017-08-06 14:10:45 
+ * @Author: chen_huang
+ * @Date: 2017-08-06 14:10:45
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-09 23:47:39
+ * @Last Modified time: 2017-08-29 22:32:52
  */
 
 /* eslint-disable no-undef, no-unused-vars */
-import axios from 'axios';
-import qs from 'qs';
+import axios from 'axios'
+import qs from 'qs'
 
 const xhr = ({ method = 'post', url, data = null }) => {
-
     const promise = new Promise((resolve, reject) => {
         axios({
             method: method,
@@ -23,16 +22,15 @@ const xhr = ({ method = 'post', url, data = null }) => {
                 code = res.data.code,
                 resultMsg = res.data.resultMsg,
                 status = res.data.status
-            } = res;
-            resolve(data);
+            } = res
+            resolve(data)
         })
         .catch(err => {
-            reject(err);
-        });
-    });
+            reject(err)
+        })
+    })
 
-    return promise;
-    
-};
+    return promise
+}
 
-export default xhr;
+export default xhr
