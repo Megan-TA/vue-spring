@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-19 19:51:05
+ * @Last Modified time: 2017-10-19 19:52:45
  */
 <template>
   
@@ -69,12 +69,12 @@ export default {
         test () {
             this.$store.commit('increment')
             axios.get('/api/test/userName=张三')
-            .then((res) => {
-                alert(res.data.passWord)
-            })
-            .catch((err) => {
-                alert(err)
-            })
+                .then((res) => {
+                    alert(res.data.passWord)
+                })
+                .catch((err) => {
+                    alert(err)
+                })
         }
     },
         // computed: {
