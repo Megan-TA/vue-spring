@@ -2,30 +2,73 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-19 19:52:45
+ * @Last Modified time: 2017-10-23 17:59:32
  */
 <template>
   
   <header>
-    <el-menu theme="dark" mode="horizontal">
-      <!-- <el-menu-item index="0">欢迎您,</el-menu-item> -->
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">导航</template>
-        <el-menu-item v-for="(item, num) in navItem" index="2-1">{{num}} {{item}}</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="3" v-if="userInfo == null">
-        <router-link to="/login">登录</router-link>   
-      </el-menu-item>
-      <el-menu-item index="4">
-        <router-link to="/goods">商品</router-link>   
-      </el-menu-item>
-      <el-menu-item index="5">
-        <router-link to="/auction">个人拍卖</router-link>   
-      </el-menu-item>
-      <el-menu-item index="6" v-if="userInfo != null" @click="logout">退出</el-menu-item>
-    </el-menu>
-    <p @click="test">11111</p>
+    <!-- 标题 start -->
+    <div class="topbox">
+        <div class="container">
+            <div class="title">
+                <router-link to = '/'>网站首页</router-link>
+                hi，欢迎来到聚藏天下
+            </div>
+            <div class="userInfoBox">
+                <router-link to = '/login'>登录</router-link>
+                <span>|</span>
+                <router-link to = '/register'>注册</router-link>
+            </div>
+        </div>
+    </div>
+    <!-- 标题 end -->
+    <!-- 搜索 start -->
+    <div class="searchBox">
+        <div class="logobox">
+            <router-link to = '/'></router-link>
+        </div>
+        <div class="schbox">
+            <form action="/search" method="post" target="_blank">
+                <div class="schbar">
+                    <dl class="schtype">
+                        <dt>搜藏品<i class="icon-arrowdown"></i></dt>
+                        <!-- <dd><a href="#shop">搜店铺</a></dd> -->
+                    </dl>
+                    <input type="text" name="wd" value="" placeholder="请输入搜索关键词" class="sch-input">
+                    <button type="submit" class="sch-submit">搜索</button>
+                </div>
+                <!-- <p class="schwords">热门搜索：<a href="/search?wd=%E9%9B%8D%E6%AD%A3" target="_blank">雍正</a><a href="/search?wd=%E8%8B%8F%E7%82%89%E8%8A%B1%E9%92%B1" target="_blank">苏炉花钱</a><a href="/search?wd=%E5%92%B8%E4%B8%B0" target="_blank">咸丰</a><a href="/search?wd=%E9%A1%BA%E6%B2%BB" target="_blank">顺治</a><a href="/search?wd=%E7%BD%97%E6%B1%89" target="_blank">罗汉</a></p> -->
+            </form>
+        </div>
+        <div class="srvbox">
+            <dl>
+                <dt><img src="//www.jucangtianxia.com/static/images/jctx_qrcode.jpg" width="70"></dt>
+                <dd>
+                    <p>微信扫一扫</p>
+                    <p>关注网站公众号</p>
+                    <p><i class="icon-tel"></i>400-103-5055</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <!-- 搜索 end --> 
+    <!-- tab start -->
+    <div class="menubox">
+        <div class="container">
+            <ul class="menu">
+                <li>
+                    <router-link to = '/'>首页</router-link>
+                </li>
+                <li>
+                    <router-link to = '/goods'>商品详情</router-link>
+                </li>
+                <li>
+                    <router-link to = '/auction'>个人拍卖</router-link>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- tab end -->
   </header>
   
 </template>
@@ -90,6 +133,104 @@ export default {
 }
 </script>
 
-<style lang="stylus">  
-  
+<style lang="stylus"> 
+    // top
+    .topbox
+        background #f1f1f1
+        font-size 12px
+        color #666
+        .container
+            display flex
+            justify-content space-between
+            margin 0 auto
+            width 1200px
+            height  30px
+            line-height 30px
+            .userInfoBox
+                a
+                    margin: 0 10px
+                    color #666
+    // 搜索
+    .searchBox
+        width 1200px
+        height 70px
+        margin 15px auto
+        display flex
+        .logobox
+            margin-right 50px
+            a
+                display block
+                width 250px
+                height 100%
+                background url('//www.jucangtianxia.com/static/images/logo.png') left center no-repeat
+        .schbox
+            flex 2
+            display flex
+            align-items center
+            .schbar
+                display flex
+                .schtype
+                    color #666
+                    dt
+                        width 80px
+                        height 36px
+                        line-height 36px
+                        border 1px solid #f03231
+                        border-right 0
+                        cursor pointer
+                        padding-left 10px
+                        box-sizing border-box
+                .sch-input
+                    width 420px
+                    height 32px
+                    line-height 32px
+                    border 1px solid #f03231
+                    border-left 0
+                    border-right 0
+                    outline none  
+                .sch-submit
+                    width 100px
+                    height 36px
+                    line-height 36px
+                    font-size 16px
+                    background #f03231
+                    color #ffffff
+                    text-align center
+                    outline none
+                    border 0
+                    cursor pointer
+        .srvbox
+            width 300px
+            margin-left 110px
+            dl
+                display flex
+                dt
+                    width 70px
+                    height 70px
+                dd
+                    p
+                        text-align left
+                        line-height 22px
+                        white-space nowrap
+
+    // tab
+    .menubox
+        width 100%
+        height 36px
+        line-height 35px
+        border-bottom 1px solid #f03231
+        .container
+            width 1200px
+            margin 0 auto
+        .menu
+            display flex
+            font-size 16px
+            li
+                a
+                    display block
+                    padding 0 20px
+                    &:hover,
+                    &.router-link-exact-active
+                        color #e70000
+
 </style>
