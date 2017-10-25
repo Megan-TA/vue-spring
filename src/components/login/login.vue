@@ -41,6 +41,7 @@
 </template>
 <script>
 import loginService from '../../services/loginService'
+// import header from '../header/header'
 // import bus from '../common';
 export default {
     data () {
@@ -120,6 +121,10 @@ export default {
                     })
                 })
         }
+    },
+
+    components: {
+
     }
 }
 </script>

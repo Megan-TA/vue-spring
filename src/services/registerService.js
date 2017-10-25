@@ -3,7 +3,7 @@ import xhr from './xhr/promise'
 class RegisterService {
     register (userData) {
         return xhr({
-            url: '/auction/user/goRegister',
+            url: '/api/register',
             data: userData
         })
     }

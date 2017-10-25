@@ -60,11 +60,11 @@
                     <router-link to = '/'>首页</router-link>
                 </li>
                 <li>
-                    <router-link to = '/goods'>商品详情</router-link>
+                    <router-link to = '/auction'>商品列表</router-link>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link to = '/auction'>个人拍卖</router-link>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -173,8 +173,8 @@ export default {
                     color #666
                     dt
                         width 80px
-                        height 36px
-                        line-height 36px
+                        height 37px
+                        line-height 37px
                         border 1px solid #f03231
                         border-right 0
                         cursor pointer
@@ -190,8 +190,8 @@ export default {
                     outline none  
                 .sch-submit
                     width 100px
-                    height 36px
-                    line-height 36px
+                    height 37px
+                    line-height 37px
                     font-size 16px
                     background #f03231
                     color #ffffff

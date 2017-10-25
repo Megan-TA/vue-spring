@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:30:51
+ * @Last Modified time: 2017-10-26 00:37:27
  */
 <template>
     <div class="register">
@@ -17,13 +17,13 @@
             <el-form-item label="密码">
                 <input  
                     type="password" 
-                    v-model="userPassword"
+                    v-model="userPassWord"
                     v-validate="'required|min:6|max:20|alpha_num'"
-                    name="userPassword"
+                    name="userPassWord"
                     class="el-input__inner">
-                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
+                <span v-show="errors.has('userPassWord')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
             </el-form-item>
-            <el-form-item label="确认密码">
+            <!-- <el-form-item label="确认密码">
                 <input  
                     type="password" 
                     v-model="userConfirmPasswod"
@@ -31,7 +31,7 @@
                     name="userConfirmPasswod"
                     class="el-input__inner">
                 <span v-show="errors.has('userConfirmPasswod')" class="el-form-item__error">{{ errors.first('userConfirmPasswod') }}</span>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item>
                 <el-button type="primary" @click="validateForm">立即注册</el-button>
             </el-form-item>
@@ -47,9 +47,8 @@ export default {
     data () {
         return {
             userPhone: '',
-            userPassword: '',
-            userConfirmPasswod: '',
-            verifyCode: '0000'
+            userPassWord: ''
+            // verifyCode: '0000'
         }
     },
 
@@ -70,19 +69,19 @@ export default {
 
         registerSubmit () {
             let userPhone = this.userPhone
-            let userPassword = this.userPassword
-            let verifyCode = this.verifyCode
+            let userPassWord = this.userPassWord
+            // let verifyCode = this.verifyCode
 
             const data = {
                 'userPhone': userPhone,
-                'userPassword': userPassword,
-                'verifyCode': verifyCode
+                'userPassWord': userPassWord
+                // 'verifyCode': verifyCode
             }
 
             registerService
                 .register(data)
                 .then(res => {
-                    if (res.code === '666') {
+                    if (res.state === 1) {
                         this.$message({
                             'message': '注册成功!',
                             'type': 'success'

@@ -3,25 +3,25 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 17:19:41
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-19 19:27:26
+ * @Last Modified time: 2017-10-26 00:33:47
 */
 const MONGODB = require('./db')
 
-const USERINFO = 'userInfo'
+const USERINFO = 'user'
 
 class User {
-    constructor (userName, passWord) {
-        this.userName = userName
-        this.passWord = passWord
+    constructor (userPhone, userPassWord) {
+        this.userPhone = userPhone
+        this.userPassWord = userPassWord
     }
 
     /**
-     * 通过userName读取信息
-     * @param {any} userName
+     * 通过userPhone读取信息
+     * @param {any} userPhone
      * @param {any} callback
      * @memberof User
      */
-    get (userName, callback) {
+    get (userPhone, callback) {
         MONGODB.open((err, db) => {
             if (err) return callback(err)
             // 读取 users 集合
@@ -31,7 +31,7 @@ class User {
                     return callback(err)
                 }
                 collection.findOne({
-                    userName: userName
+                    userPhone: userPhone
                 }, (err, userInfo) => {
                     db.close()
                     if (err) return callback(err)
@@ -48,8 +48,8 @@ class User {
      */
     save (callback) {
         let userInfo = {
-            userName: this.userName,
-            passWord: this.passWord
+            userPhone: this.userPhone,
+            userPassWord: this.userPassWord
         }
         MONGODB.open((err, db) => {
             if (err) return callback(err)
@@ -62,9 +62,11 @@ class User {
                     safe: true
                 }, (err, result) => {
                     MONGODB.close()
-                    if (err) return callback(err)
+                    if (err) return callback(null, err)
                     console.log('保存成功！')
-                    return callback(null)
+                    return callback(null, {
+                        state: 1
+                    })
                 })
             })
         })
@@ -72,12 +74,12 @@ class User {
 
     /**
      * 更新用户信息
-     * @param {any} userName
+     * @param {any} userPhone
      * @param {any} updateUserInfo
      * @param {any} callback
      * @memberof User
      */
-    update (userName, updateUserInfo, callback) {
+    update (userPhone, updateUserInfo, callback) {
         MONGODB.open((err, db) => {
             if (err) return callback(db)
             db.collection(USERINFO, (err, collection) => {
@@ -86,7 +88,7 @@ class User {
                     return callback(err)
                 }
                 collection.update({
-                    'userName': userName
+                    'userPhone': userPhone
                 }, {
                     $set: updateUserInfo
                 }, (err, result) => {
@@ -98,4 +100,5 @@ class User {
         })
     }
 }
+
 module.exports = User

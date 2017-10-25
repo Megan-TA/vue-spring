@@ -10,7 +10,6 @@
         <v-header></v-header>
         <p>222</p>
     </div>
-
 </template>
 <script>
 import header from '../header/header'
