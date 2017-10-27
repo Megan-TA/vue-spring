@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 17:19:41
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-26 00:33:47
+ * @Last Modified time: 2017-10-27 08:34:07
 */
 const MONGODB = require('./db')
 
@@ -62,10 +62,10 @@ class User {
                     safe: true
                 }, (err, result) => {
                     MONGODB.close()
-                    if (err) return callback(null, err)
+                    if (err) return callback(null, {state: 500})
                     console.log('保存成功！')
                     return callback(null, {
-                        state: 1
+                        state: 200
                     })
                 })
             })

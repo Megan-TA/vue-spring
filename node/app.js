@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // session引入mongo临时会话cookie
 app.use(session({
+    name: 'Spring',
     secret: settings.cookieSecret,
     key: settings.db,         // cookie name
     resave: true,

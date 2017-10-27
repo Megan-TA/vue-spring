@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-26 00:37:27
+ * @Last Modified time: 2017-10-27 08:44:52
  */
 <template>
     <div class="register">
@@ -81,7 +81,7 @@ export default {
             registerService
                 .register(data)
                 .then(res => {
-                    if (res.state === 1) {
+                    if (res.state == 200) {
                         this.$message({
                             'message': '注册成功!',
                             'type': 'success'
@@ -98,7 +98,7 @@ export default {
                             'message': res.resultMsg,
                             'type': 'warning'
                         })
-                    };
+                    }
                 })
                 .catch(err => {
                     this.$message({

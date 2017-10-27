@@ -20,6 +20,6 @@ module.exports = {
   'rules': {
     "vuefix/vuefix": [2, {"auto": true}],
     'indent': ['error', 4],
-    'eqeqeq': 2
+    'eqeqeq': 0
   }
 }
