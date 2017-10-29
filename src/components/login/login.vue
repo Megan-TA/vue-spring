@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:36:43
+ * @Last Modified time: 2017-10-30 00:52:02
  */
 <template>
     <div class="login">
@@ -20,11 +20,11 @@
             <el-form-item label="密码">
                 <el-input 
                     type="password" 
-                    v-model="userPassword" 
+                    v-model="userPassWord" 
                     placeholder="请输入密码" 
                     name="userPassword"
                     v-validate="'required|min:6|max:20|alpha_num'"></el-input>
-                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
+                <span v-show="errors.has('userPassWord')" class="el-form-item__error">{{ errors.first('userPassWord') }}</span>
             </el-form-item>
             <el-row>
                 <el-col :span="5" :offset="15">
@@ -48,7 +48,7 @@ export default {
         return {
             labelPosition: 'right',
             userPhone: '',
-            userPassword: ''
+            userPassWord: ''
         }
     },
 
@@ -69,17 +69,15 @@ export default {
         },
 
         loginSubmit () {
-            let userPhone = this.userPhone
-            let userPassword = this.userPassword
-            let paramsFrom = this.$route.query && this.$route.query.from
+            // let paramsFrom = this.$route.query && this.$route.query.from
             const data = {
-                'userPhone': userPhone,
-                'userPassword': userPassword
+                'userPhone': this.userPhone,
+                'userPassWord': this.userPassWord
             }
             loginService
                 .login(data)
                 .then(res => {
-                    if (res.code === '666') {
+                    if (res.state == '200') {
                         this.$message({
                             'message': '登录成功！',
                             'type': 'success'
@@ -87,31 +85,16 @@ export default {
 
                         // bus.$emit('userSignIn', 'test');
                         // this.$store.commit('getUserInfo');
-                        window.localStorage.setItem('userInfo', 11)
-
-                        if (paramsFrom) {
-                            // 拍卖详情页点击登录跳转回详情页
-                            if (paramsFrom === 'auctionDetails') {
-                                this.$router.push({
-                                    name: 'auctionDetailsBids',
-                                    query: {
-                                        uerId: '111'
-                                    }
-                                })
-                            }
-                        } else {
-                            this.$router.push({
-                                name: 'home',
-                                query: {
-                                    uerId: '111'
-                                }
-                            })
-                        };
-                    } else {
+                        this.$router.push({
+                            name: 'home'
+                        })
+                    } else if (res.state == '400') {
                         this.$message({
-                            'message': res.resultMsg,
+                            'message': '手机号/密码不正确',
                             'type': 'warning'
                         })
+                        this.userPassWord = ''
+                        this.userPhone = ''
                     }
                 })
                 .catch(err => {

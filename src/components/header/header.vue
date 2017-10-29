@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-23 17:59:32
+ * @Last Modified time: 2017-10-30 00:21:36
  */
 <template>
   
@@ -15,9 +15,16 @@
                 hi，欢迎来到聚藏天下
             </div>
             <div class="userInfoBox">
-                <router-link to = '/login'>登录</router-link>
-                <span>|</span>
-                <router-link to = '/register'>注册</router-link>
+                <template v-if="!isLogin">
+                    <router-link to = '/login'>登录</router-link>
+                    <span class="line">|</span>
+                    <router-link to = '/register'>注册</router-link>
+                </template>
+                <template v-else>
+                    <span>欢迎您：</span>
+                    <span class="line">|</span>
+                    <span @click = 'logut'>登出</span>
+                </template>
             </div>
         </div>
     </div>
@@ -75,6 +82,7 @@
 
 <script>
 // import bus from '../common';
+import util from '../../utils/js/util'
 import axios from 'axios'
 export default {
 
@@ -84,7 +92,7 @@ export default {
           //     window.localStorage.setItem('userInfo', userInfo);
           //     this.$store.state.headerModule.userInfo = userInfo;
           // });
-        this.userInfo = window.localStorage.getItem('userInfo')
+        this.isLogin = util.getCookie('Spring') != null
     },
 
     data () {
@@ -95,7 +103,9 @@ export default {
             // 导航index
             activeIndex: 0,
             // 导航name
-            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集']
+            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集'],
+            isLogin: this.isLogin
+
         }
     },
 
@@ -118,6 +128,10 @@ export default {
                 .catch((err) => {
                     alert(err)
                 })
+        },
+        logut () {
+            util.delCookie('Spring')
+            this.isLogin = false
         }
     },
         // computed: {
@@ -150,6 +164,8 @@ export default {
                 a
                     margin: 0 10px
                     color #666
+                span:not(.line)
+                    cursor pointer
     // 搜索
     .searchBox
         width 1200px

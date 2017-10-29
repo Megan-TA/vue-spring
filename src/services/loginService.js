@@ -4,7 +4,7 @@ class LoginService {
 
     login (userData) {
         return xhr({
-            url: '/auction/user/goLogin',
+            url: '/api/login',
             data: userData
         })
     };

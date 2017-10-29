@@ -36,7 +36,7 @@ app.use(session({
     key: settings.db,         // cookie name
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }, // 30days
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: '' }, // 30days
     store: new MongoStore({
         url: 'mongodb://localhost/Spring'
     })

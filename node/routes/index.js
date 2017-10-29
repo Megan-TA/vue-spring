@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 13:54:10
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-27 09:22:12
+ * @Last Modified time: 2017-10-30 00:28:17
 */
 const UserModel = require('../model/userModel')
 
@@ -24,18 +24,21 @@ module.exports = (app) => {
             session.user = 1
         }
     })
-
+    // 注册
     app.post('/api/register', (req, res) => {
         let { userPhone, userPassWord } = req.body
         let User = new UserModel(userPhone, userPassWord)
-        let session = req.session
-        if (session.user) {
-            console.log('session: ' + session.user)
-        } else {
-            session.user = 1
-        }
         User.save((err, result) => {
-            if (err) return res.end('失败')
+            if (err) return res.end('注册失败')
+            res.json(result)
+        })
+    })
+    // 登录
+    app.post('/api/login', (req, res) => {
+        let { userPhone, userPassWord } = req.body
+        let User = new UserModel(userPhone, userPassWord)
+        User.get((err, result) => {
+            if (err) return res.end('登录失败')
             res.json(result)
         })
     })

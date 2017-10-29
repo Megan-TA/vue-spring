@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-27 08:44:52
+ * @Last Modified time: 2017-10-30 00:32:35
  */
 <template>
     <div class="register">
@@ -86,12 +86,8 @@ export default {
                             'message': '注册成功!',
                             'type': 'success'
                         })
-                        window.sessionStorage.setItem('userInfo', 11)
                         this.$router.push({
-                            name: 'home',
-                            query: {
-                                uerId: '111'
-                            }
+                            name: 'home'
                         })
                     } else {
                         this.$message({
