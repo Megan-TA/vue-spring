@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-30 00:21:36
+ * @Last Modified time: 2017-10-31 22:29:22
  */
 <template>
   
@@ -22,6 +22,8 @@
                 </template>
                 <template v-else>
                     <span>欢迎您：</span>
+                    <span class="line">|</span>
+                    <router-link to = '/user'>个人中心</router-link>
                     <span class="line">|</span>
                     <span @click = 'logut'>登出</span>
                 </template>
@@ -82,8 +84,8 @@
 
 <script>
 // import bus from '../common';
-import util from '../../utils/js/util'
-import axios from 'axios'
+// import util from '../../utils/js/util'
+// import axios from 'axios'
 export default {
 
     created () {
@@ -92,7 +94,6 @@ export default {
           //     window.localStorage.setItem('userInfo', userInfo);
           //     this.$store.state.headerModule.userInfo = userInfo;
           // });
-        this.isLogin = util.getCookie('Spring') != null
     },
 
     data () {
@@ -102,9 +103,7 @@ export default {
             // dialogVisible: false,
             // 导航index
             activeIndex: 0,
-            // 导航name
-            navItem: ['首页', '商家店铺', '专场日历', '限时竞买', '一口价藏品', '拍品征集'],
-            isLogin: this.isLogin
+            isLogin: true
 
         }
     },
@@ -118,19 +117,8 @@ export default {
             this.userInfo = null
             this.$router.replace({name: 'home'})
         },
-
-        test () {
-            this.$store.commit('increment')
-            axios.get('/api/test/userName=张三')
-                .then((res) => {
-                    alert(res.data.passWord)
-                })
-                .catch((err) => {
-                    alert(err)
-                })
-        },
         logut () {
-            util.delCookie('Spring')
+            // util.delCookie('Spring')
             this.isLogin = false
         }
     },

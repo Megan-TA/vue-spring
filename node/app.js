@@ -26,17 +26,17 @@ app.set('view engine', 'jade')
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
+app.use(cookieParser(settings.cookieSecret))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // session引入mongo临时会话cookie
 app.use(session({
-    name: 'Spring',
+    name: 'session_id',
     secret: settings.cookieSecret,
     key: settings.db,         // cookie name
     resave: true,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: '' }, // 30days
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }, // 30days
     store: new MongoStore({
         url: 'mongodb://localhost/Spring'
     })

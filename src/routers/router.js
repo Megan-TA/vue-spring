@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:33:46
+ * @Last Modified time: 2017-10-31 22:31:37
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -16,6 +16,7 @@ import auction from '../components/auction/auction'
 import auctionDetails from '../components/auctionDetails/auctionDetails'
 import bids from '../components/auctionDetails/bids'
 import describe from '../components/auctionDetails/describe'
+import user from '../components/user/user'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ const routes = [
         // meta: {
         //     required: true
         // }
+    },
+    {
+        path: '/user',
+        name: 'user',
+        component: user
     },
     {
         path: '/auction',
