@@ -3,16 +3,24 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 17:19:41
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-30 00:48:48
+ * @Last Modified time: 2017-11-06 01:03:18
 */
 const MONGODB = require('./db')
 
 const USERINFO = 'user'
 
+const state = {
+    err: {
+        state: 500,
+        message: '内部错误'
+    }
+}
+
 class User {
-    constructor (userPhone, userPassWord) {
+    constructor (userPhone, userPassWord, updateUserInfo) {
         this.userPhone = userPhone
         this.userPassWord = userPassWord
+        this.updateUserInfo = updateUserInfo || {}
     }
 
     /**
@@ -32,17 +40,18 @@ class User {
             db.collection(USERINFO, (err, collection) => {
                 if (err) {
                     db.close()
-                    return callback(err)
+                    return callback(null, state.err)
                 }
                 collection.findOne({
                     userPhone: userInfo.userPhone,
                     userPassWord: userInfo.userPassWord
-                }, (err, result) => {
+                }, (err, docs) => {
                     db.close()
-                    if (err) return callback(null, {state: 500})
-                    if (result == null) return callback(null, {state: 400})
+                    if (err) return callback(null, state.err)
+                    // if (result == null) return callback(null, {state: 400, message: '内部错误'})
                     return callback(null, {
-                        state: 200
+                        state: 200,
+                        message: '获取成功'
                     })
                 })
             })
@@ -60,27 +69,34 @@ class User {
             userPassWord: this.userPassWord
         }
         MONGODB.open((err, db) => {
-            if (err) return callback(err)
+            if (err) return callback(null, err)
             db.collection(USERINFO, (err, collection) => {
                 if (err) {
                     db.close()
                     return callback(err)
                 }
-                collection.insert(userInfo, {
-                    safe: true
-                }, (err, result) => {
-                    MONGODB.close()
-                    if (err) return callback(null, {state: 500})
-                    if (result == null) return callback(null, {state: 400})
-                    console.log('保存成功！')
-                    return callback(null, {
-                        state: 200
+                collection.find({
+                    userPhone: userInfo.userPhone
+                }).toArray((err, docs) => {
+                    if (err) return callback(null, state.err)
+                    if (docs.length > 0) return callback(null, {state: 304, message: '用户已注册'})
+
+                    collection.insert(userInfo, {
+                        safe: true
+                    }, (err, docs) => {
+                        MONGODB.close()
+                        if (err) return callback(null, state.err)
+                        if (docs == null) return callback(null, {state: 400, message: '插入数据成功'})
+                        console.log('插入数据成功！')
+                        return callback(null, {
+                            state: 200,
+                            message: '注册成功'
+                        })
                     })
                 })
             })
         })
     }
-
     /**
      * 更新用户信息
      * @param {any} userPhone
@@ -97,13 +113,16 @@ class User {
                     return callback(err)
                 }
                 collection.update({
-                    'userPhone': userPhone
+                    'userPhone': this.userPhone
                 }, {
-                    $set: updateUserInfo
-                }, (err, result) => {
+                    $set: this.updateUserInfo
+                }, (err, docs) => {
                     MONGODB.close()
-                    if (err) return callback(err)
-                    return callback(null)
+                    if (err) return callback(null, {state: 500, message: '内部数据错误'})
+                    return callback(null, {
+                        state: 200,
+                        message: '更新成功'
+                    })
                 })
             })
         })

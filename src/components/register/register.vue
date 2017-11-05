@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-30 00:32:35
+ * @Last Modified time: 2017-11-06 00:54:22
  */
 <template>
     <div class="register">
@@ -83,7 +83,7 @@ export default {
                 .then(res => {
                     if (res.state == 200) {
                         this.$message({
-                            'message': '注册成功!',
+                            'message': res.message,
                             'type': 'success'
                         })
                         this.$router.push({
@@ -91,7 +91,7 @@ export default {
                         })
                     } else {
                         this.$message({
-                            'message': res.resultMsg,
+                            'message': res.message,
                             'type': 'warning'
                         })
                     }

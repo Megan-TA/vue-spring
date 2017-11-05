@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-31 22:31:37
+ * @Last Modified time: 2017-11-03 01:02:05
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -16,7 +16,9 @@ import auction from '../components/auction/auction'
 import auctionDetails from '../components/auctionDetails/auctionDetails'
 import bids from '../components/auctionDetails/bids'
 import describe from '../components/auctionDetails/describe'
+// 用户中心
 import user from '../components/user/user'
+import userRightBox from '../components/user/userRightBox'
 
 Vue.use(VueRouter)
 
@@ -57,7 +59,15 @@ const routes = [
     {
         path: '/user',
         name: 'user',
-        component: user
+        component: user,
+        children: [
+            {
+                path: ':name',
+                name: 'userRightBox',
+                component: userRightBox,
+                props: true
+            }
+        ]
     },
     {
         path: '/auction',

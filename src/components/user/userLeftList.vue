@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:36:37
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-31 23:06:16
+ * @Last Modified time: 2017-11-03 01:21:40
  */
 <template>
     <div class="user-left-box">
@@ -12,7 +12,7 @@
                 <i></i>交易中心
             </dt>
             <dd>
-                <router-link to='/'>买入订单</router-link>
+                <router-link to='/user/order?state=1'>买入订单</router-link>
             </dd>
             <dd>
                 <router-link to='/'>买入订单确认</router-link>
@@ -34,7 +34,7 @@
                 <i></i>用户信息
             </dt>
             <dd>
-                <router-link to='/'>个人资料</router-link>
+                <router-link to='/user/userInfo'>个人资料</router-link>
             </dd>
         </dl>
     </div>
@@ -46,10 +46,12 @@ export default {
         return {
 
         }
+    },
+    methods: {
     }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .user-left-box
         width 200px
         padding 5px 0
@@ -73,5 +75,9 @@ export default {
             cursor pointer
             &:hover
                 a
-                    color red
+                    color #f03231
+            a
+                display block
+                &.router-link-exact-active
+                    color #f03231
 </style>
