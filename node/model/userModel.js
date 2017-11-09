@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 17:19:41
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-06 01:03:18
+ * @Last Modified time: 2017-11-09 09:36:24
 */
 const MONGODB = require('./db')
 
@@ -35,7 +35,7 @@ class User {
             userPassWord: this.userPassWord
         }
         MONGODB.open((err, db) => {
-            if (err) return callback(err)
+            if (err) return callback(null, state.err)
             // 读取 users 集合
             db.collection(USERINFO, (err, collection) => {
                 if (err) {

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-19 13:54:10
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-30 00:28:17
+ * @Last Modified time: 2017-11-09 09:39:05
 */
 const UserModel = require('../model/userModel')
 
@@ -30,6 +30,7 @@ module.exports = (app) => {
         let User = new UserModel(userPhone, userPassWord)
         User.save((err, result) => {
             if (err) return res.end('注册失败')
+            req.session.user = userPhone
             res.json(result)
         })
     })
