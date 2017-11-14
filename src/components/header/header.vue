@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-31 22:29:22
+ * @Last Modified time: 2017-11-14 00:53:35
  */
 <template>
   
@@ -15,17 +15,17 @@
                 hi，欢迎来到聚藏天下
             </div>
             <div class="userInfoBox">
-                <template v-if="!isLogin">
-                    <router-link to = '/login'>登录</router-link>
-                    <span class="line">|</span>
-                    <router-link to = '/register'>注册</router-link>
-                </template>
-                <template v-else>
-                    <span>欢迎您：</span>
+                <template v-if="userPhone">
+                    <span>欢迎您：{{userPhone}}</span>
                     <span class="line">|</span>
                     <router-link to = '/user'>个人中心</router-link>
                     <span class="line">|</span>
-                    <span @click = 'logut'>登出</span>
+                    <span @click = 'logout'>登出</span>
+                </template>
+                <template v-else>
+                    <router-link to = '/login'>登录</router-link>
+                    <span class="line">|</span>
+                    <router-link to = '/register'>注册</router-link>
                 </template>
             </div>
         </div>
@@ -84,8 +84,8 @@
 
 <script>
 // import bus from '../common';
-// import util from '../../utils/js/util'
-// import axios from 'axios'
+import util from '../../utils/js/util'
+import logoutService from '../../services/logoutService'
 export default {
 
     created () {
@@ -96,15 +96,18 @@ export default {
           // });
     },
 
+    mounted () {
+        util.getCookie('userPhone') == null
+            ? this.userPhone = null : this.userPhone = util.getCookie('userPhone')
+    },
+
     data () {
         return {
-            userInfo: null,
             // // 对话框控制开关
             // dialogVisible: false,
             // 导航index
             activeIndex: 0,
-            isLogin: true
-
+            userPhone: this.userPhone
         }
     },
 
@@ -113,13 +116,24 @@ export default {
             this.navItemIndex = key
         },
         logout () {
-            window.localStorage.removeItem('userInfo')
-            this.userInfo = null
-            this.$router.replace({name: 'home'})
-        },
-        logut () {
-            // util.delCookie('Spring')
-            this.isLogin = false
+            logoutService.logout({})
+                    .then(res => {
+                        if (res.state == 200) {
+                            this.$message({
+                                'message': res.message,
+                                'type': 'success'
+                            })
+                            this.userPhone = null
+                        }
+                    })
+                    .catch(err => {
+                        this.$message({
+                            'message': '登出失败!' + err,
+                            'type': 'error'
+                        })
+                    })
+
+            // this.$router.replace({name: 'home'})
         }
     },
         // computed: {

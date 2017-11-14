@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:18:28
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-03 00:24:45
+ * @Last Modified time: 2017-11-14 00:51:15
  */
 <template>
     <div>
@@ -22,7 +22,7 @@
 </template>
 <script>
 import userLeftList from './userLeftList'
-import userRightBox from './userRightBox'
+import userRightBox from './rightBox/userRightBox'
 export default {
     props: [],
     data () {

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-06 00:54:22
+ * @Last Modified time: 2017-11-11 20:09:30
  */
 <template>
     <div class="register">
@@ -17,11 +17,11 @@
             <el-form-item label="密码">
                 <input  
                     type="password" 
-                    v-model="userPassWord"
+                    v-model="userPassword"
                     v-validate="'required|min:6|max:20|alpha_num'"
-                    name="userPassWord"
+                    name="userPassword"
                     class="el-input__inner">
-                <span v-show="errors.has('userPassWord')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
+                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
             </el-form-item>
             <!-- <el-form-item label="确认密码">
                 <input  
@@ -47,7 +47,7 @@ export default {
     data () {
         return {
             userPhone: '',
-            userPassWord: ''
+            userPassword: ''
             // verifyCode: '0000'
         }
     },
@@ -69,25 +69,25 @@ export default {
 
         registerSubmit () {
             let userPhone = this.userPhone
-            let userPassWord = this.userPassWord
+            let userPassword = this.userPassword
             // let verifyCode = this.verifyCode
 
             const data = {
                 'userPhone': userPhone,
-                'userPassWord': userPassWord
+                'userPassword': userPassword
                 // 'verifyCode': verifyCode
             }
 
             registerService
                 .register(data)
                 .then(res => {
-                    if (res.state == 200) {
+                    if (res.success) {
                         this.$message({
                             'message': res.message,
                             'type': 'success'
                         })
                         this.$router.push({
-                            name: 'home'
+                            name: 'login'
                         })
                     } else {
                         this.$message({

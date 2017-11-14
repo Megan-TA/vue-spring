@@ -6,13 +6,18 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 
 // 引入mongo部分
-var session = require('express-session')
+// var session = require('express-session')
 var settings = require('./settings')
 // 用于存储session到mongo中
-var MongoStore = require('connect-mongo')(session)
+// var MongoStore = require('connect-mongo')(session)
+const mongoose = require('mongoose')
+
+// toekn认证模块
+const passport = require('passport') // 用户认证模块passport
+const Strategy = require('passport-http-bearer').Strategy // token验证模块
 
 // 路由
-var renderRoutes = require('./routes/index')
+var renderRoutes = require('./routes/router')
 // var users = require('./routes/users')
 
 var app = express()
@@ -23,26 +28,25 @@ app.set('view engine', 'jade')
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(passport.initialize()) // 初始化passport模块
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser(settings.cookieSecret))
 app.use(express.static(path.join(__dirname, 'public')))
 
-// session引入mongo临时会话cookie
-app.use(session({
-    name: 'session_id',
-    secret: settings.cookieSecret,
-    key: settings.db,         // cookie name
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }, // 30days
-    store: new MongoStore({
-        url: 'mongodb://localhost/Spring'
-    })
-}))
-
 renderRoutes(app)
+
+mongoose.Promise = global.Promise
+
+// session引入mongo临时会话cookie
+// app.use(session({
+//     name: 'session_id',
+//     secret: settings.cookieSecret,
+//     key: settings.db,         // cookie name
+//     resave: true,
+//     saveUninitialized: true
+// }))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

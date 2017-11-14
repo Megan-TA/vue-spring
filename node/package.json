@@ -26,6 +26,11 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "node-uuid": "^1.4.8"
+    "bcrypt": "^1.0.3",
+    "crypto": "^0.0.3",
+    "jsonwebtoken": "^8.1.0",
+    "node-uuid": "^1.4.8",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1"
   }
 }

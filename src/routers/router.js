@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-07 00:53:39
+ * @Last Modified time: 2017-11-14 00:49:11
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -18,7 +18,7 @@ import bids from '../components/auctionDetails/bids'
 import describe from '../components/auctionDetails/describe'
 // 用户中心
 import user from '../components/user/user'
-import userRightBox from '../components/user/userRightBox'
+import userRightBox from '../components/user/rightBox/userRightBox'
 
 Vue.use(VueRouter)
 
@@ -41,7 +41,10 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: login
+        component: login,
+        meta: {
+            required: true
+        }
     },
     {
         path: '/logout',
@@ -56,13 +59,20 @@ const routes = [
         //     required: true
         // }
     },
+    // 用户中心
     {
         path: '/user',
         name: 'user',
         component: user,
         children: [
             {
-                path: ':name',
+                path: 'auction/:name',
+                name: 'userRightBox',
+                component: userRightBox,
+                props: true
+            },
+            {
+                path: 'order/:name',
                 name: 'userRightBox',
                 component: userRightBox,
                 props: true
@@ -107,10 +117,12 @@ const router = new VueRouter({
 // 路由拦截
 router.beforeEach((to, from, next) => {
     if (to.matched.some(res => res.meta.required)) {
-        if (window.sessionStorage.getItem('userInfo') !== null) {
-            next()
+        if (localStorage.getItem('userPhone') != null) {
+            next({
+                name: 'home'
+            })
         } else {
-            next({name: 'register'})
+            next()
         }
     } else {
         next()

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:36:37
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-07 00:34:39
+ * @Last Modified time: 2017-11-14 00:55:45
  */
 <template>
     <div class="user-left-box">
@@ -12,7 +12,7 @@
                 <i></i>交易中心
             </dt>
             <dd>
-                <router-link to='/user/order?state=1'>买入订单</router-link>
+                <router-link to='/user/order/buyout?state=1'>买入订单</router-link>
             </dd>
             <dd>
                 <router-link to='/'>买入订单确认</router-link>

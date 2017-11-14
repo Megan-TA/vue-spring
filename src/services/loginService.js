@@ -4,7 +4,7 @@ class LoginService {
 
     login (userData) {
         return xhr({
-            url: '/api/login',
+            url: '/api/user/login',
             data: userData
         })
     };

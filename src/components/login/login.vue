@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-10-30 00:52:02
+ * @Last Modified time: 2017-11-14 00:38:02
  */
 <template>
     <div class="login">
@@ -20,11 +20,11 @@
             <el-form-item label="密码">
                 <el-input 
                     type="password" 
-                    v-model="userPassWord" 
+                    v-model="userPassword" 
                     placeholder="请输入密码" 
                     name="userPassword"
                     v-validate="'required|min:6|max:20|alpha_num'"></el-input>
-                <span v-show="errors.has('userPassWord')" class="el-form-item__error">{{ errors.first('userPassWord') }}</span>
+                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
             </el-form-item>
             <el-row>
                 <el-col :span="5" :offset="15">
@@ -43,12 +43,13 @@
 import loginService from '../../services/loginService'
 // import header from '../header/header'
 // import bus from '../common';
+import util from '../../utils/js/util'
 export default {
     data () {
         return {
             labelPosition: 'right',
             userPhone: '',
-            userPassWord: ''
+            userPassword: ''
         }
     },
 
@@ -72,25 +73,26 @@ export default {
             // let paramsFrom = this.$route.query && this.$route.query.from
             const data = {
                 'userPhone': this.userPhone,
-                'userPassWord': this.userPassWord
+                'userPassword': this.userPassword
             }
             loginService
                 .login(data)
                 .then(res => {
-                    if (res.state == '200') {
+                    if (res.success) {
                         this.$message({
-                            'message': '登录成功！',
+                            'message': res.message,
                             'type': 'success'
                         })
-
+                        util.setCookie('token', res.token, 7)
+                        util.setCookie('userPhone', res.userPhone, 7)
                         // bus.$emit('userSignIn', 'test');
                         // this.$store.commit('getUserInfo');
                         this.$router.push({
                             name: 'home'
                         })
-                    } else if (res.state == '400') {
+                    } else {
                         this.$message({
-                            'message': '手机号/密码不正确',
+                            'message': res.message,
                             'type': 'warning'
                         })
                         this.userPassWord = ''
@@ -99,7 +101,7 @@ export default {
                 })
                 .catch(err => {
                     this.$message({
-                        'message': '注册失败!' + err,
+                        'message': err,
                         'type': 'error'
                     })
                 })

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-07 01:09:43
+ * @Last Modified time: 2017-11-14 01:11:25
  */
 <template>
     <div id="release">
@@ -12,8 +12,13 @@
             <dd>
                 <p class="release-list-title">拍品分类</p>
                 <div class="releaslist-box">
-                    <el-select placeholder="请选择">
-                        <el-option>
+                    <el-select placeholder="请选择" v-model="value">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                        >
                         </el-option>
                     </el-select>
                 </div>
@@ -37,21 +42,27 @@
                 </div>
             </dd>
             <dd>
-                <p class="release-list-title">开拍时间</p>
+                <p class="release-list-title">拍卖时间</p>
                 <div class="releaslist-box">
-                    
+                    <el-date-picker
+                        v-model="value6"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                    </el-date-picker>
                 </div>
-            </dd>
-            <dd>
-                <p class="release-list-title">结标时间</p>
-                <div class="releaslist-box">
-                    
-                </div>
+                
             </dd>
             <dd>
                 <p class="release-list-title">拍品描述</p>
                 <div class="releaslist-box">
-                    
+                    <el-input
+                        type="textarea"
+                        :rows="2"
+                        placeholder="请输入内容"
+                        v-model="textarea">
+                    </el-input>
                 </div>
             </dd>
             <dd>
@@ -70,20 +81,14 @@ export default {
         return {
             options: [{
                 value: '选项1',
-                label: '黄金糕'
+                label: 'test1'
             }, {
                 value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
-            }]
+                label: 'test2'
+            }],
+            value6: '',
+            textarea: '',
+            value: ''
         }
     }
 }
