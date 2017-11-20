@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-06 11:26:50 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 00:38:02
+ * @Last Modified time: 2017-11-20 20:10:18
  */
 <template>
     <div class="login">
@@ -40,10 +40,10 @@
     </div>
 </template>
 <script>
-import loginService from '../../services/loginService'
+import loginService from 'services/loginService'
 // import header from '../header/header'
 // import bus from '../common';
-import util from '../../utils/js/util'
+import util from 'utils/js/util'
 export default {
     data () {
         return {

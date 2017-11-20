@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-12 10:19:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:33:58
+ * @Last Modified time: 2017-11-20 20:09:20
  * 拍品描述
  */
 <template>
@@ -28,7 +28,7 @@ export default {
     }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .describe
         padding 30px
 </style>        

@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-30 16:16:27
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-13 22:33:10
+ * @Last Modified time: 2017-11-20 18:25:08
  */
 import Vue from 'vue'
 import Validator from './validate/validate'
@@ -13,7 +13,7 @@ import store from './store/index'
 // css
 import 'utils/stylus/index.styl'
 // js
-import router from './routers/router'
+import router from 'routers/router'
 
 // 开启debug模式
 Vue.config.debug = true

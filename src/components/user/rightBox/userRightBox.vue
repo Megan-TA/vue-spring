@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:02:14
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 09:16:49
+ * @Last Modified time: 2017-11-20 20:02:08
  */
 <template>
     <div class="user-right-box">
@@ -18,7 +18,7 @@
 <script>
 import userOrder from '../userOrder'
 import userInfo from '../userInfo'
-import auctionRelease from './auction/release'
+import auctionRelease from 'components/user/rightBox/auction/release'
 export default {
     // 为了降低路由组件与用户组件耦合度使用props传值name展示不同组件
     props: ['name'],
@@ -36,7 +36,7 @@ export default {
     }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .user-right-box
         width 100%
         background #fff

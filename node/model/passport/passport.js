@@ -3,9 +3,8 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 15:13:11
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-11 15:18:07
+ * @Last Modified time: 2017-11-20 20:06:16
  */
-const passport = require('passport')
 const Strategy = require('passport-http-bearer').Strategy
 
 const User = require('../user')

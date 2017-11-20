@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-12 10:04:24 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:34:15
+ * @Last Modified time: 2017-11-20 20:09:15
  */
 <template>
     <div class="bids">
@@ -47,7 +47,7 @@ export default {
     }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .bids
         padding 30px
 </style>

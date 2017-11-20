@@ -55,6 +55,7 @@ export default {
                 cursor pointer
     .container
         display flex
+        min-width 1100px
         justify-content flexible-between
         margin 20px 50px
 </style>

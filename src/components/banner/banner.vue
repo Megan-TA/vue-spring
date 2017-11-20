@@ -44,7 +44,7 @@
 </script>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 
   .banner-content
     width 700px

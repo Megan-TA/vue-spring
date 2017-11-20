@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-11 20:09:30
+ * @Last Modified time: 2017-11-20 20:11:35
  */
 <template>
     <div class="register">
@@ -39,7 +39,7 @@
     </div> 
 </template>
 <script>
-import registerService from '../../services/registerService'
+import registerService from 'services/registerService'
 export default {
 
     props: [],

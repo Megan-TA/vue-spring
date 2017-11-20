@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 00:53:35
+ * @Last Modified time: 2017-11-20 20:09:43
  */
 <template>
   
@@ -12,7 +12,7 @@
         <div class="container">
             <div class="title">
                 <router-link to = '/'>网站首页</router-link>
-                hi，欢迎来到聚藏天下
+                hi，欢迎来到聚藏天下 <p @click="test">11</p>
             </div>
             <div class="userInfoBox">
                 <template v-if="userPhone">
@@ -84,8 +84,8 @@
 
 <script>
 // import bus from '../common';
-import util from '../../utils/js/util'
-import logoutService from '../../services/logoutService'
+import util from 'utils/js/util'
+import logoutService from 'services/logoutService'
 export default {
 
     created () {
@@ -114,6 +114,9 @@ export default {
     methods: {
         tip (key) {
             this.navItemIndex = key
+        },
+        test () {
+            alert(2)
         },
         logout () {
             logoutService.logout({})
@@ -149,7 +152,7 @@ export default {
 }
 </script>
 
-<style lang="stylus"> 
+<style lang="stylus" scoped> 
     // top
     .topbox
         background #f1f1f1
