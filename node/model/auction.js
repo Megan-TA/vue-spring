@@ -3,14 +3,14 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 20:32:49
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-20 16:12:30
+ * @Last Modified time: 2017-11-21 17:05:48
  */
 const mongoose = require('mongoose')
 const db = require('./config')
 const Schema = mongoose.Schema
 
 const AuctionSchema = new Schema({
-    objectId: {
+    ObjectID: {
         type: Schema.Types.ObjectId,
         unique: true,
         require: true
@@ -37,12 +37,10 @@ const AuctionSchema = new Schema({
     },
     startTime: {
         type: Date,
-        default: Date.now,
         require: true
     },
     endTime: {
         type: Date,
-        default: Date.now,
         require: true
     },
     describe: {

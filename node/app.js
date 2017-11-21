@@ -4,6 +4,7 @@ var path = require('path')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+let Cors = require('./util/middleaware/cors')
 
 // 引入mongo部分
 // var session = require('express-session')
@@ -22,6 +23,7 @@ var renderRoutes = require('./routes/router')
 
 var app = express()
 
+app.use(Cors)
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')

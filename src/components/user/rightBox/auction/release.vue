@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-20 17:11:12
+ * @Last Modified time: 2017-11-21 19:41:53
  */
 <template>
     <div id="release">
@@ -60,7 +60,8 @@
                             type="daterange"
                             range-separator="至"
                             start-placeholder="开始日期"
-                            end-placeholder="结束日期">
+                            end-placeholder="结束日期"
+                            value-format="yyyy-MM-dd">
                         </el-date-picker>
                     </div>
                 </div>
@@ -82,10 +83,12 @@
                 <div class="releaslist-box">
                     <el-upload
                         class="upload-demo"
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action="//127.0.0.1:3001/api/auction/release/upload/images"
                         :on-preview="handlePreview"
                         :on-remove="handleRemove"
                         :file-list="imgUrl"
+                        name="images"
+                        multiple
                         list-type="picture">
                         <el-button size="small" type="primary">点击上传</el-button>
                         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -97,7 +100,9 @@
     </div>
 </template>
 <script>
+let moment = require('moment')
 import AuctionService from 'services/user/auction/auction'
+
 export default {
     props: [],
     data () {
@@ -161,8 +166,22 @@ export default {
             console.log(file)
         },
         release () {
-            AuctionService.release({
+            this.startTime = moment(this.date[0]).format()
+            this.endTime = moment(this.date[1]).format()
 
+            AuctionService.release({
+                type: this.type,
+                title: this.title,
+                postage: this.postage,
+                price: this.price,
+                priceStep: this.priceStep,
+                startTime: this.startTime,
+                endTime: this.endTime,
+                describe: this.describe
+            }).then((res) => {
+                alert(1)
+            }).catch((err) => {
+                console.error(err)
             })
         }
     }

@@ -3,12 +3,12 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 17:58:48
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-11 20:26:39
+ * @Last Modified time: 2017-11-21 14:10:32
  */
 let jwt = require('jsonwebtoken')
 let Settings = require('../../settings')
 module.exports = (req, res, next) => {
-    let token = req.body.token || req.query.token || req.headers['x-access-token']
+    let token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token']
     if (token) {
         // 确认token
         jwt.verify(token, Settings.tokenSecret, (err, result) => {
@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
                     message: 'token信息错误'
                 })
             } else {
-                req.ObjectID = result.ObjectID
+                req.body.ObjectID = result.ObjectID
                 next()
             }
         })

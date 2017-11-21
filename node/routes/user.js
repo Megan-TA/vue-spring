@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:06:20
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 09:22:54
+ * @Last Modified time: 2017-11-21 14:11:04
  */
 const express = require('express')
 const User = require('../model/user')
@@ -89,7 +89,7 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/info', $token, (req, res) => {
-    let ObjectID = req.ObjectID
+    let ObjectID = req.body.ObjectID
     res.json({
         success: true,
         ObjectID: ObjectID
