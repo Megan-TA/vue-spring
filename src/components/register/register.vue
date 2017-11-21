@@ -2,116 +2,115 @@
  * @Author: chen_huang 
  * @Date: 2017-08-05 18:04:04 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-07 23:44:46
+ * @Last Modified time: 2017-11-20 20:11:35
  */
 <template>
-    
-    <form @submit.prevent = "handleSubmit">
-        <div class="register">
-            <div class="register-header">
-                <h1 class="logo hide-text">会员注册</h1>
-            </div>
-            <div class="form-group">
-                <input type="text" 
-                    class="form-control" 
-                    placeholder="手机号" 
-                    v-model="userPhone"
-                    required>
-            </div>
-            <div class="form-group">
-                <input type="password" 
-                    class="form-control" 
-                    placeholder="密码(不少于6位)"
+    <div class="register">
+        <el-form ref="form" label-width="80px">
+            <el-form-item label="手机号">
+                <el-input 
+                    v-model="userPhone" 
+                    v-validate="'required|mobile|digits:11'"
+                    name="userPhone"></el-input>
+                <span v-show="errors.has('userPhone')" class="el-form-item__error">{{ errors.first('userPhone') }}</span>
+            </el-form-item>
+            <el-form-item label="密码">
+                <input  
+                    type="password" 
                     v-model="userPassword"
-                    required>
-            </div>
-            <!-- <div class="form-group">
-                <input type="password" class="form-control" placeholder="再次确认密码">
-            </div>
-            <div class="form-group selfdom">
-                <input type="text" class="form-control" placeholder="验证码">
-                <label for="" class="identifyingCode">验证码</label>
-            </div> -->
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox">
-                    <span>同意本站
-                        <a href="#">《用户协议》</a>
-                    </span>
-                </label>
-            </div>
-            <button type="submit" class="btn brn-default">快速注册</button>
-    
-        </div>
-    </form>
-
+                    v-validate="'required|min:6|max:20|alpha_num'"
+                    name="userPassword"
+                    class="el-input__inner">
+                <span v-show="errors.has('userPassword')" class="el-form-item__error">{{ errors.first('userPassword') }}</span>
+            </el-form-item>
+            <!-- <el-form-item label="确认密码">
+                <input  
+                    type="password" 
+                    v-model="userConfirmPasswod"
+                    v-validate="'confirmed:userPassword'"
+                    name="userConfirmPasswod"
+                    class="el-input__inner">
+                <span v-show="errors.has('userConfirmPasswod')" class="el-form-item__error">{{ errors.first('userConfirmPasswod') }}</span>
+            </el-form-item> -->
+            <el-form-item>
+                <el-button type="primary" @click="validateForm">立即注册</el-button>
+            </el-form-item>
+        </el-form>
+    </div> 
 </template>
 <script>
-import registerService from '../../services/registerService';
+import registerService from 'services/registerService'
 export default {
 
     props: [],
 
-    data() {
+    data () {
         return {
             userPhone: '',
-            userPassword: '',
-            verifyCode: '0000'
-        };
+            userPassword: ''
+            // verifyCode: '0000'
+        }
     },
 
     methods: {
-        handleSubmit() {
 
-            let userPhone = this.userPhone;
-            let userPassword = this.userPassword;
-            let verifyCode = this.verifyCode;
+        validateForm () {
+            this.$validator.validateAll()
+                .then(res => {
+                    if (res) this.registerSubmit()
+                })
+                .catch(err => {
+                    this.$message({
+                        'message': '验证失败' + err,
+                        'type': 'error'
+                    })
+                })
+        },
+
+        registerSubmit () {
+            let userPhone = this.userPhone
+            let userPassword = this.userPassword
+            // let verifyCode = this.verifyCode
 
             const data = {
                 'userPhone': userPhone,
-                'userPassword': userPassword,
-                'verifyCode': verifyCode
-            };
+                'userPassword': userPassword
+                // 'verifyCode': verifyCode
+            }
 
-            // this.$ajax({
-            //     url: '/auction/user/goRegister',
-            //     method: 'get',
-            //     data: data
-            //     // 允许该跨域带上cookie信息
-            //     // withCredentials: true
-            // })
-            // .then(res => {
-            //     console.log(res);
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // });
-
-            var s = registerService.register(data);
-
-            return s;
-         
-
+            registerService
+                .register(data)
+                .then(res => {
+                    if (res.success) {
+                        this.$message({
+                            'message': res.message,
+                            'type': 'success'
+                        })
+                        this.$router.push({
+                            name: 'login'
+                        })
+                    } else {
+                        this.$message({
+                            'message': res.message,
+                            'type': 'warning'
+                        })
+                    }
+                })
+                .catch(err => {
+                    this.$message({
+                        'message': '注册失败!' + err,
+                        'type': 'error'
+                    })
+                })
         }
     }
- 
-};
+
+}
 </script>
 <style lang="stylus">
     .register
-        width 300px
+        width 500px
         margin 0 auto
-    .register-header
-        margin 0 auto
-        width 160px
-    
-    .form-group.selfdom
-        .form-control
-            width 60%
-            display inline-block
-        .identifyingCode
-            width 38%
-            display inline-block
 
 
 </style>

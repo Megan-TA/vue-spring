@@ -1,31 +1,29 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import axios from 'axios';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-default/index.css';
+/*
+ * @Author: chen_huang
+ * @Date: 2017-07-30 16:16:27
+ * @Last Modified by: chen_huang
+ * @Last Modified time: 2017-11-20 18:25:08
+ */
+import Vue from 'vue'
+import Validator from './validate/validate'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+import store from './store/index'
 
 // css
-import 'utils/stylus/index.styl';
+import 'utils/stylus/index.styl'
 // js
-import routes from './routers/router';
-
+import router from 'routers/router'
 
 // 开启debug模式
-Vue.config.debug = true;
+Vue.config.debug = true
 
-Vue.use(VueRouter);
+Vue.use(ElementUI)
 
-Vue.use(ElementUI);
-// 由于axios不能使用use 只能每个需要发送请求的组件即时引入
-// 此时可以通过挂载原型链的方式引用
-Vue.prototype.$ajax = axios;
-
-const router = new VueRouter({
-  routes
-});
-
+Vue.prototype.$Validator = Validator
 
 /* eslint-disable no-new */
 new Vue({
-  router
-}).$mount('#app');
+    router,
+    store
+}).$mount('#app')

@@ -30,6 +30,10 @@ module.exports = {
 				pathRewrite: {
       				'^/auction/': '/auction/'
     			}
+			},
+			'/api': {
+				target: 'http://127.0.0.1:3001',
+				changeOrigin: true
 			}
 		},
 		// CSS Sourcemaps off by default because relative paths are "buggy"

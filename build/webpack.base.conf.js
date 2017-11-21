@@ -17,7 +17,9 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[name].bundle.js',
+    chunkFilename: 'chunk/[name].[chunkhash].js',
+    sourceMapFilename: '[file].map'
   },
   resolve: {
     extensions: ['', '.js', '.vue', '.json','.vue'],
@@ -26,8 +28,10 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'utils': path.resolve(__dirname, '../src/utils'),
       'components': path.resolve(__dirname, '../src/components'),
-      'filters': path.resolve(__dirname, '../src/filters'),
+      'store': path.resolve(__dirname, '../src/store'),
+      'routers': path.resolve(__dirname, '../src/routers'),
       'services': path.resolve(__dirname, '../src/services'),
+      'static': path.resolve(__dirname, '../static'),
       'vue$': 'vue/dist/vue.js',
     }
   },
