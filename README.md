@@ -6,28 +6,29 @@
 
 ## **开始步骤**
 
-1. 切换到node目录下 运行相关运行指令
+0. 数据默认采用mongodb  需要自行安装mongodb
 
->     supervisor --debug ./bin/www
+1. mongodb数据我本地测试存放在D:\mongodb\data
 
-2. mongodb数据我本地测试存放在D:\mongodb\data
-
-3. mongodb图形化工具Robomongo 启动mongodb服务
-
-4. CMD进入到D:\mongodb\bin目录下运行mongodb指令
+   cmd进入到D:\mongodb\bin目录下运行mongodb指令启动mongodb
 
 >     mongod --dbpath d:\mongodb\data
 
-5. D:\mongodb\data\db  来启动mongo服务器127.0.0.1:27017
+2. 因为服务端这块采用node 需要启动node（切换到node目录下）
 
-6. 启动项目  npm run dev
+> npm run dev
 
-7. 如果需要调试 nodejs debug模式调试借用中间件 node-inspector  
+3. 项目主目录启动项目  默认本地地址localhost:8088
+
+> npm run dev
+
+---
+### 建议
+
+1. 如果需要调试 nodejs debug模式调试借用中间件 node-inspector  
 npm中运行下面代码 浏览器输入127.0.0.1:8080?port=5858 进入nodejs调试界面
-
-```
-node-inspector 
-```
+2. 如果需要图形化处理查看mongodb数据 可以试试mongodb图形化工具Robomongo
+---
 
 
 
