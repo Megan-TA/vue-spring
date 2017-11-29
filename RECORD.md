@@ -38,7 +38,31 @@ proxyTable: {
 
 3. model创建集合的名称 会自动判断是否可以复数  如果是 自动修改名称为复数名称第三个参数可以强制指定我们需要落库的名称
 
+4. 多表关联 ref
+
+    moongose通过populate这个api进行关联 
+
+    另外ref中的值必须存要关联表名中document中自动生成的_id
+
+    实例save之后再进行populate操作
+
+    ```
+    let newList = new List({
+        _list: newAuction._id
+    })
+    newList.save((err) => {
+        if (err) throw err
+    })
+
+    List.find()
+        .populate('_list')
+        .exec((err, doc) => {
+            if (err) throw err
+            console.log(doc)
+        })
+    ```
+
 
 > ### multetr
 
-貌似name不能使用multer 之前使用一直报错
+貌似name不能为multer 之前使用一直报错

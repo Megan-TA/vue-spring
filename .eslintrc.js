@@ -18,7 +18,7 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
-    "vuefix/vuefix": [2, {"auto": true}],
+    'vuefix/vuefix': [2, {'auto': true}],
     'indent': ['error', 4],
     'eqeqeq': 0
   }

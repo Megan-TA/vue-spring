@@ -4,7 +4,7 @@ var path = require('path')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
-let Cors = require('./util/middleaware/cors')
+let Cors = require('./util/middleware/cors')
 
 // 引入mongo部分
 // var session = require('express-session')

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-21 19:41:53
+ * @Last Modified time: 2017-11-29 20:27:34
  */
 <template>
     <div id="release">
@@ -84,9 +84,9 @@
                     <el-upload
                         class="upload-demo"
                         action="//127.0.0.1:3001/api/auction/release/upload/images"
-                        :on-preview="handlePreview"
                         :on-remove="handleRemove"
-                        :file-list="imgUrl"
+                        :on-success="uploadSuccess"
+                        :file-list="fileImgUrl"
                         name="images"
                         multiple
                         list-type="picture">
@@ -96,7 +96,9 @@
                 </div>
             </dd>
         </dl>
-        <el-button type="success" @click='release'>发布</el-button>
+        <div class="buttonBox">
+            <el-button type="success" @click='release'>发布</el-button>
+        </div>
     </div>
 </template>
 <script>
@@ -111,40 +113,40 @@ export default {
                 label: '钱币',
                 options: [{
                     label: '先秦',
-                    value: '0'
+                    value: '先秦'
                 }, {
                     label: '秦汉',
-                    value: '1'
+                    value: '秦汉'
                 }, {
                     label: '三国两晋南北朝',
-                    value: '2'
+                    value: '三国两晋南北朝'
                 }, {
                     label: '隋唐五代十国',
-                    value: '3'
+                    value: '隋唐五代十国'
                 }, {
                     label: '两宋',
-                    value: '4'
+                    value: '两宋'
                 }, {
                     label: '辽金西夏元',
-                    value: '5'
+                    value: '辽金西夏元'
                 }, {
                     label: '明清',
-                    value: '6'
+                    value: '明清'
                 }, {
                     label: '机制币',
-                    value: '7'
+                    value: '机制币'
                 }, {
                     label: '花钱',
-                    value: '8'
+                    value: '花钱'
                 }, {
                     label: '邻国钱',
-                    value: '9'
+                    value: '邻国钱'
                 }, {
                     label: '当代纪念币',
-                    value: '10'
+                    value: '当代纪念币'
                 }, {
                     label: '其他',
-                    value: '11'
+                    value: '其他'
                 }]
             }],
             type: '',
@@ -154,20 +156,42 @@ export default {
             postage: '',
             date: '',
             describe: '',
+            fileImgUrl: [],
             imgUrl: []
-
         }
     },
     methods: {
+        // 上传文件移除的钩子
         handleRemove (file, fileList) {
-            console.log(file, fileList)
+            let that = this
+            this.imgUrl.forEach((item, index) => {
+                if (item.name == file.name) {
+                    that.imgUrl.splice(index, 1)
+                    window.break
+                }
+            })
         },
-        handlePreview (file) {
-            console.log(file)
+        uploadSuccess (res, file, fileList) {
+            this.imgUrl.push({
+                name: file.name,
+                url: file.url
+            })
+        },
+        clearData () {
+            this.type = ''
+            this.title = ''
+            this.postage = ''
+            this.price = ''
+            this.priceStep = ''
+            this.startTime = ''
+            this.date = ''
+            this.describe = ''
+            this.imgUrl = []
+            this.fileImgUrl = []
         },
         release () {
-            this.startTime = moment(this.date[0]).format()
-            this.endTime = moment(this.date[1]).format()
+            this.startTime = moment(this.date[0]).format('YYYY-MM-DD HH:mm:ss')
+            this.endTime = moment(this.date[1]).format('YYYY-MM-DD HH:mm:ss')
 
             AuctionService.release({
                 type: this.type,
@@ -177,10 +201,26 @@ export default {
                 priceStep: this.priceStep,
                 startTime: this.startTime,
                 endTime: this.endTime,
-                describe: this.describe
+                describe: this.describe,
+                imgUrl: this.imgUrl
             }).then((res) => {
-                alert(1)
+                if (res.success) {
+                    this.clearData()
+                    this.$message({
+                        message: res.message,
+                        type: 'success'
+                    })
+                } else {
+                    this.$message({
+                        message: res.message,
+                        type: 'error'
+                    })
+                }
             }).catch((err) => {
+                this.$message({
+                    message: '发布失败',
+                    type: 'error'
+                })
                 console.error(err)
             })
         }
@@ -198,4 +238,7 @@ export default {
             font-size 16px
     .el-textarea__inner
         width 300px !important
+    .buttonBox
+        margin-top 20px
+        text-align center
 </style>

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-08 13:16:31 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:34:53
+ * @Last Modified time: 2017-11-29 14:56:17
  * 拍卖物品列表页
  */
 <template>

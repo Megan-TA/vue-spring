@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-20 20:22:26
+ * @Last Modified time: 2017-11-29 14:57:24
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -11,6 +11,8 @@ import App from '../App.vue'
 import register from 'components/register/register'
 import login from 'components/login/login'
 import goods from 'components/goods/goods'
+// 拍卖列表页
+import list from 'components/list/list'
 import auction from 'components/auction/auction'
 // 拍品详情页
 import auctionDetails from 'components/auctionDetails/auctionDetails'
@@ -107,6 +109,11 @@ const routes = [
                 component: describe
             }
         ]
+    },
+    {
+        path: '/list',
+        name: 'list',
+        component: list
     }
 ]
 
