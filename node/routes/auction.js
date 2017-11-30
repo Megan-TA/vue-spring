@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 20:30:57
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-29 19:31:43
+ * @Last Modified time: 2017-11-30 18:01:12
  */
 const express = require('express')
 const router = express.Router()
@@ -90,7 +90,12 @@ router.post('/release', $token, (req, res) => {
 })
 // 上传图片
 router.all('/release/upload/images', upload.single('images'), (req, res) => {
-    resState(res, true, '上传成功！')
+    res.json({
+        success: true,
+        message: '上传成功！',
+        imgName: req.imgName,
+        imgUrl: req.imgUrl
+    })
 })
 
 module.exports = router

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:02:14
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-20 20:02:08
+ * @Last Modified time: 2017-11-30 13:13:25
  */
 <template>
     <div class="user-right-box">
@@ -38,7 +38,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
     .user-right-box
-        width 100%
+        width 480px
         background #fff
         padding 20px
         overflow hidden

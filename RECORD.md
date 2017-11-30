@@ -60,9 +60,45 @@ proxyTable: {
             if (err) throw err
             console.log(doc)
         })
+    // 添加过滤条件 select
+    // path 需要填充数据的字段 （对应ref）
+     _Auction.find({})
+            .populate({
+                path: '_list',
+                select: 'list.title list.imgUrl.url'
+            })
+            .exec((err, doc) => {
+                if (err) throw err
+                console.log(doc)
+                res.json(doc[0]._list.list)
+            })
     ```
 
+    ---
 
-> ### multetr
+    相关链接
+
+    1.   [Mongoose使用population建立关系链接实例说明](http://www.jianshu.com/p/1c98bf94802d)
+
+        
+5. 插入时间少8H
+
+    相关链接
+
+    1. [MongoDB 时区问题](http://blog.csdn.net/erica_1230/article/details/42551175)
+
+6. 查询
+
+    相关链接
+
+    1. [MongoDB查询（数组、内嵌文档）](http://blog.csdn.net/congcong68/article/details/46919227)
+
+    2. [mongoose中通过-id查询的方法](http://blog.csdn.net/naihejiang/article/details/52769471)
+
+    3. [mongodb获取具体某一天的查询语句](http://blog.csdn.net/u013066244/article/details/51136224)
+
+    4. [Mongoose 参考手册](http://cnodejs.org/topic/548e54d157fd3ae46b233502)
+
+> ### multetr(上传图片插件)
 
 貌似name不能为multer 之前使用一直报错
