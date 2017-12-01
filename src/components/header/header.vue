@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-29 14:57:48
+ * @Last Modified time: 2017-12-01 10:27:02
  */
 <template>
   
@@ -85,7 +85,7 @@
 <script>
 // import bus from '../common';
 import util from 'utils/js/util'
-import logoutService from 'services/logoutService'
+// import logoutService from 'services/logoutService'
 export default {
 
     created () {
@@ -119,22 +119,9 @@ export default {
             alert(2)
         },
         logout () {
-            logoutService.logout({})
-                    .then(res => {
-                        if (res.state == 200) {
-                            this.$message({
-                                'message': res.message,
-                                'type': 'success'
-                            })
-                            this.userPhone = null
-                        }
-                    })
-                    .catch(err => {
-                        this.$message({
-                            'message': '登出失败!' + err,
-                            'type': 'error'
-                        })
-                    })
+            util.delCookie('token')
+            util.delCookie('userPhone')
+            this.userPhone = null
 
             // this.$router.replace({name: 'home'})
         }

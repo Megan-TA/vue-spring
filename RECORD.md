@@ -30,6 +30,12 @@ proxyTable: {
 
 > 3. vuex 刷新数据恢复初始值  无法长时间记忆  不适合注册登录状态的记忆
 
+## web
+
+1. token验证
+
+    [几种常用的认证机制](https://www.cnblogs.com/chris-oil/p/4890459.html)
+
 ## mongoose使用遇到的坑 ##
 
 1. 连接数据库方法 由connect变为createConnection
@@ -80,6 +86,8 @@ proxyTable: {
 
     1.   [Mongoose使用population建立关系链接实例说明](http://www.jianshu.com/p/1c98bf94802d)
 
+    2. [mongodb中的populate方法详细api](http://blog.csdn.net/hellochenlu/article/details/50467563)
+
         
 5. 插入时间少8H
 
@@ -98,6 +106,23 @@ proxyTable: {
     3. [mongodb获取具体某一天的查询语句](http://blog.csdn.net/u013066244/article/details/51136224)
 
     4. [Mongoose 参考手册](http://cnodejs.org/topic/548e54d157fd3ae46b233502)
+
+
+8. E11000 duplicate key error index (索引重复)
+
+    坑啊 早知道还不如用mysql
+
+    解决 删除索引
+
+    ```
+    db.user.getIndexes()
+    db.user.dropIndex("objectId_1")
+    ```
+
+    相关链接
+
+    1. [Mongoengine create_user function generating null objectId's](https://stackoverflow.com/questions/17431698/mongoengine-create-user-function-generating-null-objectids)
+
 
 > ### multetr(上传图片插件)
 

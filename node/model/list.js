@@ -1,28 +1,25 @@
 /*
- * 商品模型
+ * 商品列表模型
  * @Author: chen_huang
- * @Date: 2017-11-11 20:32:49
+ * @Date: 2017-12-01 15:45:36
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 14:51:49
- */
+ * @Last Modified time: 2017-12-01 16:19:01
+*/
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const db = require('./config')
 
-const AuctionSchema = new Schema({
-    uid: {
+const listSchema = new Schema({
+    _uid: {
         type: Schema.Types.ObjectId,
-        require: true,
-        unique: true
+        ref: 'User'
     },
     list: [{
         type: {
-            type: String,
-            require: true
+            type: String
         },
         title: {
-            type: String,
-            require: true
+            type: String
         },
         postage: {
             type: String,
@@ -57,5 +54,4 @@ const AuctionSchema = new Schema({
     }]
 })
 
-module.exports = db.model('Auction', AuctionSchema, 'Auction')
-
+module.exports = db.model('list', listSchema, 'list')

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:37:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:34:41
+ * @Last Modified time: 2017-12-01 15:34:20
  * 拍卖详情页
  */
 <template>
@@ -16,11 +16,28 @@
 import header from '../header/header'
 import auctionDetailsHead from './head'
 import auctionDetailsMain from './main'
+import auctionDetailService from 'services/auctionDetail/auctionDetail'
 export default {
     props: [],
+
+    beforeCreate () {
+        auctionDetailService
+            .getAuctionDetailInfo({})
+            .then((result) => {
+                this.remoteDetailData = result
+            })
+            .catch((err) => {
+                this.$message({
+                    message: '获取拍品信息失败',
+                    type: 'error'
+                })
+                console.error(err)
+            })
+    },
+
     data () {
         return {
-
+            remoteDetailData: null
         }
     },
 

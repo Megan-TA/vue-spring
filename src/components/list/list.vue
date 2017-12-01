@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-29 14:54:53
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-30 19:39:14
+ * @Last Modified time: 2017-12-01 16:50:22
 */
 <template>
     <div>
@@ -12,13 +12,11 @@
             <ul class="list-box">
                 <li>
                 <el-row>
-                    <el-col :span="8">
-                        <el-aside width="200px">Aside</el-aside>
-                        <el-main>1111</el-main>
-                    </el-col>
-                    <el-col :span="4" v-for="(val, index) in listInfo" :key='index'>
+                    <el-col :span="6" v-for="(val, index) in remoteListData" :key='index'>
                         <el-card>
-                         <img :src="remoteUrl + val[0].url" alt="" width="150">
+                            <router-link :to=val.coinId>
+                                <img :src="remoteUrl + val.imgUrl[0].url" alt="图片挂啦~" width="100%">
+                            </router-link>
                         </el-card>
                     </el-col>
                 </el-row>
@@ -46,21 +44,23 @@ export default {
     data () {
         return {
             listInfo: null,
-            remoteUrl: '//127.0.0.1:3001'
+            remoteUrl: '//127.0.0.1:3001',
+            remoteListData: null
         }
     },
 
     methods: {
         parseData (res) {
-            let tempArr = []
-
             return new Promise((resolve, reject) => {
+                let tempArray = []
                 res.forEach((item) => {
-                    tempArr.push(item.imgUrl)
+                    item.list.forEach((result) => {
+                        result.coinId = '/auctionDetails?coinId=' + result._id
+                    })
+                    tempArray = tempArray.concat(item.list)
                 })
-                this.listInfo = tempArr
-                console.log(tempArr)
-                resolve(tempArr)
+                this.remoteListData = tempArray
+                resolve(res)
             }).catch((err) => {
                 this.$message({
                     message: '获取列表信息失败~',

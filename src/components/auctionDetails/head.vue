@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 14:35:38 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-08-29 22:33:52
+ * @Last Modified time: 2017-12-01 15:33:32
  * 拍卖详情页上半部分
  */
 <template>
@@ -66,6 +66,11 @@
 <script>
 export default {
     props: [],
+
+    beforeCreate () {
+
+    },
+
     data () {
         return {
             userInfo: window.sessionStorage.getItem('userInfo') == null

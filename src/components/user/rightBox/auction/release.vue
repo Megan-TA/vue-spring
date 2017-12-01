@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-30 18:19:35
+ * @Last Modified time: 2017-12-01 16:18:21
  */
 <template>
     <div id="release">
@@ -66,7 +66,7 @@
             <el-form-item label="拍品图片" prop='imgUrl'>
                 <el-upload
                     class="upload-demo"
-                    action="//127.0.0.1:3001/api/auction/release/upload/images"
+                    action="//127.0.0.1:3001/api/user/release/upload/images"
                     :before-upload="beforeUpload"
                     :on-remove="handleRemove"
                     :on-success="uploadSuccess"
@@ -89,7 +89,7 @@
 </template>
 <script>
 let moment = require('moment')
-import AuctionService from 'services/user/auction/auction'
+import ReleaseService from 'services/user/release/release'
 
 export default {
     props: [],
@@ -198,7 +198,6 @@ export default {
         // 图片上传成功回调
         uploadSuccess (res, file, fileList) {
             this.form.imgUrl.push({
-                name: res.imgName,
                 url: res.imgUrl
             })
         },
@@ -231,7 +230,7 @@ export default {
         },
         // 提交数据
         submit () {
-            AuctionService.release({
+            ReleaseService.release({
                 type: this.form.type,
                 title: this.form.title,
                 postage: this.form.postage,

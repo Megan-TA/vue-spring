@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 17:58:48
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-29 19:31:20
+ * @Last Modified time: 2017-12-01 16:02:08
  */
 const jwt = require('jsonwebtoken')
 const Settings = require('../../settings')
@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
                 }
             } else {
                 req.body.ObjectID = result.ObjectID
+                req.body.uid = result.ObjectID
                 next()
             }
             return
