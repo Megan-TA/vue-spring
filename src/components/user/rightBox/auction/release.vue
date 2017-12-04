@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 16:18:21
+ * @Last Modified time: 2017-12-04 11:54:52
  */
 <template>
     <div id="release">
@@ -66,7 +66,7 @@
             <el-form-item label="拍品图片" prop='imgUrl'>
                 <el-upload
                     class="upload-demo"
-                    action="//127.0.0.1:3001/api/user/release/upload/images"
+                    :action= NODEHOST + "/api/user/release/upload/images"
                     :before-upload="beforeUpload"
                     :on-remove="handleRemove"
                     :on-success="uploadSuccess"
@@ -95,6 +95,7 @@ export default {
     props: [],
     data () {
         return {
+            NODEHOST: process.env.LOCALNODEHOST,
             form: {
                 title: '',
                 type: '',

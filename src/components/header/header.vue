@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 10:27:02
+ * @Last Modified time: 2017-12-04 11:06:07
  */
 <template>
   
@@ -83,6 +83,8 @@
 </template>
 
 <script>
+// import config from '../../../config.js'
+console.log(process.env)
 // import bus from '../common';
 import util from 'utils/js/util'
 // import logoutService from 'services/logoutService'

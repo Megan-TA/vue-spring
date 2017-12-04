@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-29 14:54:53
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 16:50:22
+ * @Last Modified time: 2017-12-04 11:53:25
 */
 <template>
     <div>
@@ -44,7 +44,7 @@ export default {
     data () {
         return {
             listInfo: null,
-            remoteUrl: '//127.0.0.1:3001',
+            remoteUrl: process.env.LOCALNODEHOST,
             remoteListData: null
         }
     },

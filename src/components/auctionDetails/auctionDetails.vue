@@ -2,13 +2,13 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:37:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 15:34:20
+ * @Last Modified time: 2017-12-04 15:34:41
  * 拍卖详情页
  */
 <template>
-    <div>
+    <div class="detailBox">
         <v-header></v-header>
-        <v-auctionDetailsHead></v-auctionDetailsHead>
+        <v-auctionDetailsHead :parentData='remoteDetailData.result'></v-auctionDetailsHead>
         <v-auctionDetailsMain></v-auctionDetailsMain>
     </div>
 </template>
@@ -21,8 +21,11 @@ export default {
     props: [],
 
     beforeCreate () {
+        let coinId = location.hash.split('?coinId=')[1]
         auctionDetailService
-            .getAuctionDetailInfo({})
+            .getAuctionDetailInfo({
+                coinId: coinId
+            })
             .then((result) => {
                 this.remoteDetailData = result
             })
@@ -37,7 +40,9 @@ export default {
 
     data () {
         return {
-            remoteDetailData: null
+            remoteDetailData: {
+                result: {}
+            }
         }
     },
 
@@ -50,5 +55,6 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-
+    .detailBox
+        width 1200px
 </style>

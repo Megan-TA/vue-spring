@@ -105,7 +105,9 @@ proxyTable: {
 
     3. [mongodb获取具体某一天的查询语句](http://blog.csdn.net/u013066244/article/details/51136224)
 
-    4. [Mongoose 参考手册](http://cnodejs.org/topic/548e54d157fd3ae46b233502)
+    4. [Mongose 参考手册](http://cnodejs.org/topic/548e54d157fd3ae46b233502)
+
+    5. [Mongose详细数组修改操作](http://blog.csdn.net/legend_x/article/details/11617627)
 
 
 8. E11000 duplicate key error index (索引重复)

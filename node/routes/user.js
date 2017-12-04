@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:06:20
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 16:28:32
+ * @Last Modified time: 2017-12-04 13:15:16
  */
 const express = require('express')
 const router = express.Router()
@@ -116,7 +116,18 @@ router.post('/release', $token, (req, res) => {
         if (err) throw err
         // 存在则更新
         if (oldListInfo) {
-            oldListInfo._doc.list.push({
+            // oldListInfo._doc.list.push({
+            //     type: type,
+            //     title: title,
+            //     postage: postage,
+            //     price: price,
+            //     priceStep: priceStep,
+            //     startTime: startTime,
+            //     endTime: endTime,
+            //     describe: describe,
+            //     imgUrl: imgUrl
+            // })
+            oldListInfo.update({
                 type: type,
                 title: title,
                 postage: postage,
@@ -126,8 +137,9 @@ router.post('/release', $token, (req, res) => {
                 endTime: endTime,
                 describe: describe,
                 imgUrl: imgUrl
-            })
-            oldListInfo.save((err) => {
+            }, {$push: {
+                list: 1
+            }}, (err, doc) => {
                 if (err) {
                     resState(res, false, '发布失败')
                     console.error(err)
@@ -135,6 +147,14 @@ router.post('/release', $token, (req, res) => {
                     resState(res, true, '发布成功')
                 }
             })
+            // oldListInfo.save((err) => {
+            //     if (err) {
+            //         resState(res, false, '发布失败')
+            //         console.error(err)
+            //     } else {
+            //         resState(res, true, '发布成功')
+            //     }
+            // })
         } else {
             List.create({
                 _uid: ObjectID,
