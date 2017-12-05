@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-07-30 16:11:05 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-04 11:06:07
+ * @Last Modified time: 2017-12-05 19:14:22
  */
 <template>
   
@@ -70,9 +70,6 @@
                 </li>
                 <li>
                     <router-link to = '/list'>个人拍卖列表页</router-link>
-                </li>
-                <li>
-                    <router-link to = '/auction'>商品列表</router-link>
                 </li>
             </ul>
         </div>

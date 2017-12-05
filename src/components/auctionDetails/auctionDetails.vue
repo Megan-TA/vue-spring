@@ -2,14 +2,14 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:37:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-04 15:34:41
+ * @Last Modified time: 2017-12-05 18:52:42
  * 拍卖详情页
  */
 <template>
     <div class="detailBox">
         <v-header></v-header>
-        <v-auctionDetailsHead :parentData='remoteDetailData.result'></v-auctionDetailsHead>
-        <v-auctionDetailsMain></v-auctionDetailsMain>
+        <v-auctionDetailsHead :parentData='remoteDetailData'></v-auctionDetailsHead>
+        <v-auctionDetailsMain :parentData='remoteDetailData'></v-auctionDetailsMain>
     </div>
 </template>
 <script>
@@ -17,6 +17,7 @@ import header from '../header/header'
 import auctionDetailsHead from './head'
 import auctionDetailsMain from './main'
 import auctionDetailService from 'services/auctionDetail/auctionDetail'
+import convert8h from 'utils/js/convert8h'
 export default {
     props: [],
 
@@ -26,7 +27,14 @@ export default {
             .getAuctionDetailInfo({
                 coinId: coinId
             })
-            .then((result) => {
+            .then((response) => {
+                let result = response.result
+                result.startTime = convert8h(result.startTime)
+                result.endTime = convert8h(result.endTime)
+                console.log(result.record)
+                result.record.forEach((item) => {
+                    item.date = convert8h(item.date)
+                })
                 this.remoteDetailData = result
             })
             .catch((err) => {

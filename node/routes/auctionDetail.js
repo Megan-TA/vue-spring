@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-01 14:46:30
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-04 14:03:42
+ * @Last Modified time: 2017-12-05 14:14:51
 */
 const express = require('express')
 const router = express.Router()
@@ -18,13 +18,16 @@ router.post('/getDetailInfos', (req, res) => {
         })
         .exec((err, doc) => {
             if (err) throw err
-            doc[0].list.filter((item) => {
-                if (item._doc._id == coinId) {
+            let listInfo = doc[0].list
+            for (let i = 0; i <= listInfo.length; i++) {
+                if (listInfo[i]._doc._id.toString() == coinId) {
                     res.json({
-                        result: item
+                        result: listInfo[i],
+                        success: true
                     })
+                    break
                 }
-            })
+            }
         })
 })
 

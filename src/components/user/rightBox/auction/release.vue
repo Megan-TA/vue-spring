@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-04 11:54:52
+ * @Last Modified time: 2017-12-05 17:38:16
  */
 <template>
     <div id="release">
@@ -66,7 +66,7 @@
             <el-form-item label="拍品图片" prop='imgUrl'>
                 <el-upload
                     class="upload-demo"
-                    :action= NODEHOST + "/api/user/release/upload/images"
+                    :action= NODEURL
                     :before-upload="beforeUpload"
                     :on-remove="handleRemove"
                     :on-success="uploadSuccess"
@@ -95,7 +95,7 @@ export default {
     props: [],
     data () {
         return {
-            NODEHOST: process.env.LOCALNODEHOST,
+            NODEURL: process.env.LOCALNODEHOST + '/api/user/release/upload/images',
             form: {
                 title: '',
                 type: '',
@@ -204,13 +204,14 @@ export default {
         },
         // date转startTime和endTime
         date2startend () {
+            // 开始时间和结束时间是同时存在或者同时不在
             if (this.form.date[0] == null) {
                 this.form.startTime = ''
                 this.form.endTime = ''
                 return
             }
-            this.form.startTime = moment(this.form.date[0]).format('YYYY-MM-DD HH:mm:ss')
-            this.form.endTime = moment(this.form.date[1]).format('YYYY-MM-DD HH:mm:ss')
+            this.form.startTime = moment(this.form.date[0]).valueOf()
+            this.form.endTime = moment(this.form.date[1]).valueOf()
         },
         // 重置
         reset () {
@@ -243,7 +244,7 @@ export default {
                 imgUrl: this.form.imgUrl
             }).then((res) => {
                 if (res.success) {
-                    this.reset()
+                    // this.reset()
                     this.$message({
                         message: res.message,
                         type: 'success'

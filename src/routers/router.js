@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-29 14:57:24
+ * @Last Modified time: 2017-12-05 19:12:24
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -13,11 +13,10 @@ import login from 'components/login/login'
 import goods from 'components/goods/goods'
 // 拍卖列表页
 import list from 'components/list/list'
-import auction from 'components/auction/auction'
 // 拍品详情页
 import auctionDetails from 'components/auctionDetails/auctionDetails'
-import bids from 'components/auctionDetails/bids'
-import describe from 'components/auctionDetails/describe'
+// import bids from 'components/auctionDetails/bids'
+// import describe from 'components/auctionDetails/describe'
 // 用户中心
 import user from 'components/user/user'
 import userRightBox from 'components/user/rightBox/userRightBox'
@@ -82,32 +81,20 @@ const routes = [
         ]
     },
     {
-        path: '/auction',
-        name: 'auction',
-        component: auction
-        // children: [
-        //     {
-        //         path: '/auction/auctionID',
-        //         name: 'auctionDetails',
-        //         component: auctionDetails
-        //     }
-        // ]
-    },
-    {
         path: '/auctionDetails',
         name: 'auctionDetails',
         component: auctionDetails,
         children: [
-            {
-                path: 'bids',
-                name: 'auctionDetailsBids',
-                component: bids
-            },
-            {
-                path: 'describe',
-                name: 'auctionDetailsDescribe',
-                component: describe
-            }
+            // {
+            //     path: 'bids',
+            //     name: 'auctionDetailsBids',
+            //     component: bids
+            // }
+            // {
+            //     path: 'describe',
+            //     name: 'auctionDetailsDescribe',
+            //     component: describe
+            // }
         ]
     },
     {

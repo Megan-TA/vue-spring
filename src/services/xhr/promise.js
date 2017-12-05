@@ -22,7 +22,8 @@ const xhr = ({ method = 'post', url, data = null, header = {} }) => {
                 data = res.data,
                 code = res.data.code,
                 resultMsg = res.data.resultMsg,
-                status = res.data.status
+                status = res.data.status,
+                success = res.data.success
             } = res
             resolve(data)
         })

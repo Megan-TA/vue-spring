@@ -95,7 +95,7 @@ proxyTable: {
 
     1. [MongoDB 时区问题](http://blog.csdn.net/erica_1230/article/details/42551175)
 
-6. 查询
+6. 查询/更新
 
     相关链接
 
@@ -108,6 +108,8 @@ proxyTable: {
     4. [Mongose 参考手册](http://cnodejs.org/topic/548e54d157fd3ae46b233502)
 
     5. [Mongose详细数组修改操作](http://blog.csdn.net/legend_x/article/details/11617627)
+
+    6. [mongoose批量更新数据](http://mongoosejs.com/docs/api.html#model_Model.bulkWrite)
 
 
 8. E11000 duplicate key error index (索引重复)
