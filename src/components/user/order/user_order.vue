@@ -3,11 +3,21 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:09:26
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 00:56:25
+ * @Last Modified time: 2017-12-08 18:10:25
  */
 <template>
-   <div class="order-box">
-       <ul class="order-tab">
+   <div class="userOrder">
+        <el-tabs type="border-card" :tab-click='toggle'>
+            <el-tab-pane label="全部">全部</el-tab-pane>
+            <el-tab-pane label="待付款">待付款</el-tab-pane>
+            <el-tab-pane label="待发货">待发货</el-tab-pane>
+            <el-tab-pane label="待收货">待收货</el-tab-pane>
+            <el-tab-pane label="已完成">已完成</el-tab-pane>
+            <el-tab-pane label="冻结中">冻结中</el-tab-pane>
+            <el-tab-pane label="已关闭">已关闭</el-tab-pane>
+            <el-tab-pane label="退货中">退货中</el-tab-pane>
+        </el-tabs>
+       <!-- <ul class="userOrder__tab">
            <li class="active">
                <router-link to='?state=1'>全部</router-link>
            </li>
@@ -32,9 +42,7 @@
            <li>
                <router-link to='?state=8'>退货中</router-link>
            </li>
-       </ul>
-       <p v-if='state == 1'>1111</p>
-       <p v-if='state == 2'>2222</p>
+       </ul> -->
    </div>
 </template>
 <script>
@@ -51,12 +59,17 @@ export default {
     methods: {
         fetchDate () {
             this.state = location.hash.split('=')[1]
+        },
+        toggle (tab) {
+
         }
     }
 }
 </script>
 <style lang="stylus">
-    .order-tab
+    .userOrder
+
+    .userOrder__tab
         display flex
         border-bottom  1px solid #ddd
         li

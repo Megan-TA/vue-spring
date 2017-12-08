@@ -3,17 +3,13 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:18:28
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-14 00:51:15
+ * @Last Modified time: 2017-12-07 18:47:39
  */
 <template>
-    <div>
-        <header>
-            <span>黄飞鸿</span>
-            <span>|</span>
-            <span>退出</span>
-        </header>
-        <div class="container">
-            <v-userLeftList></v-userLeftList>
+    <div class="user">
+        <v-headerTop></v-headerTop>
+        <div class="user__container">
+            <v-userLeftBox></v-userLeftBox>
             <router-view>
                 <v-userRightBox></v-userRightBox>
             </router-view>
@@ -21,8 +17,9 @@
     </div>
 </template>
 <script>
-import userLeftList from './userLeftList'
-import userRightBox from './rightBox/userRightBox'
+import headerTop from 'components/header/headerTop'
+import userLeftBox from './user_leftBox'
+import userRightBox from './user_rightBox'
 export default {
     props: [],
     data () {
@@ -31,31 +28,37 @@ export default {
         }
     },
     components: {
-        'v-userLeftList': userLeftList,
-        'v-userRightBox': userRightBox
+        'v-userLeftBox': userLeftBox,
+        'v-userRightBox': userRightBox,
+        'v-headerTop': headerTop
     }
 }
 </script>
 <style lang="stylus" scoped>
-    body 
-        background-color #f1f1f1
-    header
-        display flex
-        justify-content flex-end
-        height 30px
-        line-height 30px
-        border 1px solid #dddddd
-        background #f1f1f1
-        font-size 12px
-        color #666
-        padding 0 20px
-        span 
-            margin 0 10px
-            &:last-child
-                cursor pointer
-    .container
+    .user
+        width 1200px
+        margin 0 auto
+    .user__container
         display flex
         min-width 1100px
         justify-content flexible-between
         margin 20px 50px
+    
+    .topbox
+        background #f1f1f1
+        font-size 12px
+        color #666
+        .container
+            display flex
+            justify-content space-between
+            margin 0 auto
+            width 1200px
+            height  30px
+            line-height 30px
+            .userInfoBox
+                a
+                    margin: 0 10px
+                    color #666
+                span:not(.line)
+                    cursor pointer
 </style>

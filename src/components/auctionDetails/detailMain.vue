@@ -2,33 +2,18 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:30:08 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-05 18:50:24
+ * @Last Modified time: 2017-12-08 17:45:31
  * 拍卖详情页下方主体部分
  */
 <template>
-    <div>
-      <!-- <el-menu class="el-menu-demo" mode="horizontal" default-active="1" theme="light" :router="true">
-          <el-menu-item index="1" 
-                        :route="{ 
-                          name: 'auctionDetailsBids',
-                          query: {
-                            auctionID: 111
-                          }
-                        }"> 出价记录</el-menu-item>
-          <el-menu-item index="2"
-                        :route="{ 
-                          name: 'auctionDetailsDescribe',
-                          query: {
-                            auctionID: 111
-                          }
-                        }">拍品描述</el-menu-item>
-      </el-menu> -->
-      <!-- <router-view></router-view>  -->
-
+    <div class="detailMain">
+        <p>拍品描述</p>
+        <p>{{parentData.describe}}</p>
         <el-table
               :data='parentData.record'
                stripe
-               style="width: 100%">
+               height="288"
+               style="width:100%;">
               <el-table-column
                 prop="name"
                 label="昵称">
@@ -42,7 +27,7 @@
                 label="时间">
               </el-table-column>
         </el-table>
-    </div>
+    </div> 
 </template>
 <script>
 import bus from 'components/common'
@@ -55,15 +40,26 @@ export default {
     },
     mounted () {
         let that = this
+        this.test = this.parentData
         bus.$on('nowOffer', (transmitData) => {
             that.parentData.record.push(transmitData)
-            console.log(that.parentData.record)
+            // console.log(that.parentData.record)
         })
+    },
+
+    computed: {
+        total () {
+            let len = 0
+            if (this.parentData.record) {
+                len = this.parentData.record.length
+            }
+            return len
+        }
     },
 
     data () {
         return {
-            transmitData: ''
+
         }
     }
 

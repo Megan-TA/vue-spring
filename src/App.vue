@@ -1,6 +1,6 @@
 <template>
 
-      <div class="content">
+      <div class="app">
         <v-header></v-header>
         <v-banner></v-banner>
       </div>
@@ -37,7 +37,9 @@
 
 
 <style lang="stylus">
-
- 
+    .app
+        width 1200px
+        padding 10px
+        margin 0 auto
 
 </style>

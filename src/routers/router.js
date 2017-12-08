@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-07-31 16:16:42
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-05 19:12:24
+ * @Last Modified time: 2017-12-07 18:47:46
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -19,7 +19,7 @@ import auctionDetails from 'components/auctionDetails/auctionDetails'
 // import describe from 'components/auctionDetails/describe'
 // 用户中心
 import user from 'components/user/user'
-import userRightBox from 'components/user/rightBox/userRightBox'
+import userRightBox from 'components/user/user_rightBox'
 
 Vue.use(VueRouter)
 
@@ -67,13 +67,22 @@ const routes = [
         component: user,
         children: [
             {
+                // 发布拍品
                 path: 'auction/:name',
                 name: 'userRightBox',
                 component: userRightBox,
                 props: true
             },
             {
+                // 订单
                 path: 'order/:name',
+                name: 'userRightBox',
+                component: userRightBox,
+                props: true
+            },
+            {
+                // 用户信息
+                path: 'userInfo/:name',
                 name: 'userRightBox',
                 component: userRightBox,
                 props: true

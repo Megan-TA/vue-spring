@@ -1,10 +1,10 @@
 /*
- * token中间件（强校验）
+ * 解析token获取uid不做登录限制
  * @Author: chen_huang
- * @Date: 2017-11-11 17:58:48
+ * @Date: 2017-12-06 10:25:44
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 15:31:44
- */
+ * @Last Modified time: 2017-12-08 17:11:17
+*/
 const jwt = require('jsonwebtoken')
 const Settings = require('../../settings')
 const resState = require('../resState')
@@ -21,12 +21,12 @@ module.exports = (req, res, next) => {
                 }
             } else {
                 req.body.uid = result.uid
-                req.body.userName = result.userName
                 next()
             }
             return
         })
     } else {
-        resState(res, false, '必须提供token')
+        req.body.uid = ''
+        next()
     }
 }

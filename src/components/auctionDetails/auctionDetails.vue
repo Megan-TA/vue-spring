@@ -2,11 +2,11 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:37:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-05 18:52:42
+ * @Last Modified time: 2017-12-08 17:46:04
  * 拍卖详情页
  */
 <template>
-    <div class="detailBox">
+    <div class="auctionDetails">
         <v-header></v-header>
         <v-auctionDetailsHead :parentData='remoteDetailData'></v-auctionDetailsHead>
         <v-auctionDetailsMain :parentData='remoteDetailData'></v-auctionDetailsMain>
@@ -14,8 +14,8 @@
 </template>
 <script>
 import header from '../header/header'
-import auctionDetailsHead from './head'
-import auctionDetailsMain from './main'
+import auctionDetailsHead from './detailHead'
+import auctionDetailsMain from './detailMain'
 import auctionDetailService from 'services/auctionDetail/auctionDetail'
 import convert8h from 'utils/js/convert8h'
 export default {
@@ -29,12 +29,14 @@ export default {
             })
             .then((response) => {
                 let result = response.result
+                // 转时间+8h
                 result.startTime = convert8h(result.startTime)
                 result.endTime = convert8h(result.endTime)
                 console.log(result.record)
                 result.record.forEach((item) => {
                     item.date = convert8h(item.date)
                 })
+
                 this.remoteDetailData = result
             })
             .catch((err) => {
@@ -63,6 +65,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-    .detailBox
+    .auctionDetails
         width 1200px
+        margin 0 auto
 </style>

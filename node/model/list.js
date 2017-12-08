@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-01 15:45:36
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-05 14:18:37
+ * @Last Modified time: 2017-12-08 10:58:48
 */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -52,9 +52,11 @@ const listSchema = new Schema({
             require: true
         },
         // 拍卖详情页录入相关数据
+        // 报价
         offer: {
             type: Number
         },
+        // 报价记录
         record: [
             {
                 date: Date,
@@ -62,7 +64,14 @@ const listSchema = new Schema({
                 offer: Number,
                 offerUid: Schema.Types.ObjectId
             }
-        ]
+        ],
+        // 拍品状态
+        // 默认0 竞拍中
+        // 1 已结束竞拍
+        state: {
+            type: Number,
+            default: 0
+        }
     }]
 })
 

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:06:20
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-05 14:24:43
+ * @Last Modified time: 2017-12-08 15:31:19
  */
 const express = require('express')
 const router = express.Router()
@@ -18,18 +18,21 @@ const resState = require('../util/resState')
 const $token = require('../util/middleware/check_token')
 // 上传图片中间件
 const upload = require('../util/middleware/upload')
+// xss
+const $xss = require('../util/middleware/xss')
 
 // require('../model/passport/passport')(passport)
 
 // 注册
 router.post('/register', (req, res) => {
-    let { userPhone, userPassword } = req.body
-    if (!userPhone || !userPassword) {
+    let { userName, userPhone, userPassword } = req.body
+    if (!userPhone || !userPassword || !userName) {
         resState(res, false, '请输入您的账号密码')
     } else {
         let newUser = new User({
             userPhone: userPhone,
-            userPassword: userPassword
+            userPassword: userPassword,
+            userName: userName
         })
         newUser.save((err) => {
             if (err) {
@@ -56,9 +59,10 @@ router.post('/login', (req, res) => {
             user.comparePassword(userPassword, (err, isMatch) => {
                 if (isMatch && !err) {
                     let token = jwt.sign({
-                        ObjectID: user._id.toString()
+                        uid: user._id.toString(),
+                        userName: user.userName
                     }, settings.tokenSecret, {
-                        expiresIn: 7 * 24 * 60 * 60
+                        expiresIn: 2 * 24 * 60 * 60
                     })
                     user.token = token
                     user.save((err) => {
@@ -96,7 +100,7 @@ router.post('/info', $token, (req, res) => {
 })
 
 // 发布商品
-router.post('/release', $token, (req, res) => {
+router.post('/release', $token, $xss, (req, res) => {
     let { uid, type, title, postage,
         price, priceStep, startTime,
         endTime, describe } = req.body
@@ -200,6 +204,21 @@ router.all('/release/upload/images', upload.single('images'), (req, res) => {
         success: true,
         message: '上传成功！',
         imgUrl: req.body.imgUrl
+    })
+})
+// 获取用户信息
+router.post('/getUserInfo', $token, (req, res) => {
+    let { uid } = req.body
+    User.findOne({
+        '_id': uid
+    })
+    .select('userPhone')
+    .exec((err, doc) => {
+        if (err) throw err
+        res.json({
+            result: doc,
+            success: true
+        })
     })
 })
 

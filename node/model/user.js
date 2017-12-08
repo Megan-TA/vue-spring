@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 11:49:32
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-01 15:52:39
+ * @Last Modified time: 2017-12-08 13:07:22
  */
 const mongoose = require('mongoose')
 const db = require('./config')
@@ -11,6 +11,9 @@ const Schema = mongoose.Schema
 // const bcrypt = require('bcrypt')
 
 const UserSchema = new Schema({
+    userName: {
+        type: String
+    },
     userPhone: {
         type: String,
         unique: true,   // 不可重复约束

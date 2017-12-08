@@ -26,3 +26,9 @@ dl, dt, dd, p, ul {
 li {
   list-style: none;
 }
+
+.ell{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

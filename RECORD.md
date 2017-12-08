@@ -131,3 +131,19 @@ proxyTable: {
 > ### multetr(上传图片插件)
 
 貌似name不能为multer 之前使用一直报错
+
+> ### 网络安全
+
+    1. XSS
+
+    2. CDRF
+
+    相关链接：
+
+1. [ 关于XSS（跨站脚本攻击）和CSRF（跨站请求伪造）](http://cnodejs.org/topic/50463565329c5139760c34a1)
+
+> ### element-ui坑
+
+1. element-ui验证使用async-valid库
+
+有个bug  在指定类型type='number' 在校验数字 始终不对
