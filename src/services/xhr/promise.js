@@ -2,7 +2,7 @@
  * @Author: chen_huang
  * @Date: 2017-08-06 14:10:45
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-11-11 16:29:18
+ * @Last Modified time: 2017-12-11 19:45:55
  */
 
 /* eslint-disable no-undef, no-unused-vars */
@@ -19,13 +19,15 @@ const xhr = ({ method = 'post', url, data = null, header = {} }) => {
         })
         .then(res => {
             const {
-                data = res.data,
-                code = res.data.code,
-                resultMsg = res.data.resultMsg,
-                status = res.data.status,
+                result = res.data.result,
+                message = res.data.message,
                 success = res.data.success
             } = res
-            resolve(data)
+            if (success) {
+                resolve(res.data)
+            } else {
+                reject(message)
+            }
         })
         .catch(err => {
             reject(err)

@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:30:08 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 17:45:31
+ * @Last Modified time: 2017-12-12 13:38:36
  * 拍卖详情页下方主体部分
  */
 <template>
@@ -23,7 +23,7 @@
                 label="报价">
               </el-table-column>
               <el-table-column
-                prop='date'
+                prop='offerCreateDate'
                 label="时间">
               </el-table-column>
         </el-table>

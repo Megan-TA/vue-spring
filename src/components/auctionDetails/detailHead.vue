@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 14:35:38 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 17:41:02
+ * @Last Modified time: 2017-12-12 13:53:43
  * 拍卖详情页上部分
  */
 <template>
@@ -81,7 +81,7 @@
     </div>
 </template>
 <script>
-import listService from 'services/list/list'
+import auctionDetailService from 'services/auctionDetail/auctionDetail'
 import bus from 'components/common'
 import convert8h from 'utils/js/convert8h'
 import Countdown from 'utils/js/countdown'
@@ -148,21 +148,36 @@ export default {
         },
         // 立刻报价
         nowOffer () {
-            listService
+            auctionDetailService
                 .nowOffer({
-                    title: this.parentData.title,
+                    coinId: location.hash.split('?coinId=')[1],
                     offer: this.newOffer
                 })
                 .then((response) => {
                     let result = response.result
-                    if (response.success) {
-                        this.successCallback(result)
-                    } else {
+                    if (!response.success) {
                         this.$message({
                             message: '报价失败',
                             type: 'error'
                         })
+                        return
                     }
+                    return result
+                })
+                .then((result) => {
+                    if (!result) return
+                    // 报价成功回调
+                    result.offerCreateDate = convert8h(result.offerCreateDate)
+                    // 当前报价数值为提交的报价值
+                    this.parentData.offer = this.newOffer
+                    // 提交成功清空tempOffer之前记录的增减数值
+                    this.tempOffer = 0
+                    bus.$emit('nowOffer', result)
+                    this.$message({
+                        message: '报价成功',
+                        type: 'success'
+                    })
+                    return false
                 })
                 .catch((err) => {
                     this.$message({
@@ -171,20 +186,6 @@ export default {
                     })
                     console.error(err)
                 })
-        },
-        // 报价成功回调
-        successCallback (result) {
-            result.date = convert8h(result.date)
-            // 当前报价数值为提交的报价值
-            this.parentData.offer = this.newOffer
-            // 提交成功清空tempOffer之前记录的增减数值
-            this.tempOffer = 0
-            bus.$emit('nowOffer', result)
-            this.$message({
-                message: '报价成功',
-                type: 'success'
-            })
-            return false
         }
     }
 }

@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-29 14:54:53
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 17:08:26
+ * @Last Modified time: 2017-12-12 12:09:22
 */
 <template>
     <div class='app'>
@@ -15,7 +15,7 @@
                         <el-col :span="4" v-for="(val, index) in remoteListData" :key='index'>
                             <el-card>
                                 <router-link 
-                                        :to=val.coinId>
+                                        :to='`/auctionDetails?coinId=${val._id}`'>
                                     <img :src="remoteUrl + val.imgUrl[0].url" 
                                         alt="图片挂啦~" 
                                         width="100%"
@@ -81,31 +81,15 @@ export default {
                 .then((res) => {
                     let result = res.result
                     this.pageTotal = res.total
-                    this.parseData(result)
-                }).catch((err) => {
+                    this.remoteListData = result
+                })
+                .catch((err) => {
+                    this.$message({
+                        message: '获取列表信息失败~',
+                        type: 'error'
+                    })
                     console.error(err)
                 })
-        },
-        // 请求成功回调
-        parseData (res) {
-            return new Promise((resolve, reject) => {
-                let tempArray = []
-                res.forEach((item) => {
-                    item.list.forEach((result) => {
-                        result.coinId = '/auctionDetails?coinId=' + result._id
-                    })
-                    tempArray = tempArray.concat(item.list)
-                })
-                this.remoteListData = tempArray
-                resolve(res)
-            })
-            .catch((err) => {
-                this.$message({
-                    message: '获取列表信息失败~',
-                    type: 'error'
-                })
-                console.error(err)
-            })
         },
         // 计算出价次数
         getRecordTime (val) {

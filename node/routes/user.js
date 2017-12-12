@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:06:20
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 15:31:19
+ * @Last Modified time: 2017-12-12 10:40:53
  */
 const express = require('express')
 const router = express.Router()
@@ -108,93 +108,48 @@ router.post('/release', $token, $xss, (req, res) => {
     let imgUrl = []
     // 上传图片可能多张 需要转换
     for (var i = 0; i <= 999999; i++) {
-        if (req.body['imgUrl[' + i + '][url]']) {
+        if (req.body[`imgUrl[${i}][url]`]) {
             imgUrl.push({
-                url: req.body['imgUrl[' + i + '][url]']
+                url: req.body[`imgUrl[${i}][url]`]
             })
         } else {
             break
         }
     }
-    List.findOne({
-        _uid: uid
-    }, (err, oldListInfo) => {
-        if (err) throw err
-        // 创建新的List
-        function createList () {
-            List.create({
-                _uid: uid,
-                list: {
-                    type: type,
-                    title: title,
-                    postage: postage,
-                    price: price,
-                    priceStep: priceStep,
-                    startTime: startTime,
-                    endTime: endTime,
-                    describe: describe,
-                    imgUrl: imgUrl,
-                    offer: offer
-                }
-            }).then((info) => {
-                if (info == null) throw info
-                // 先创建列表页商品信息 之后再更新用户表关联商品表
-                User.findOne({
-                    _id: uid
-                }, (err, doc) => {
-                    if (err) {
-                        console.log(err)
-                        throw err
-                    } else {
-                        doc._list.push(info._id)
-                        doc.save((err) => {
-                            if (err) {
-                                console.log(err)
-                                throw err
-                            } else {
-                                console.log('联系人信息更新成功')
-                                resState(res, true, '发布成功！')
-                            }
-                        })
-                    }
-                })
-            })
-        }
-        // 更新List信息
-        function updateList (oldListInfo) {
-            List.update({
-                _uid: uid
-            }, {
-                $push: {
-                    'list': {
-                        type: type,
-                        title: title,
-                        postage: postage,
-                        price: price,
-                        priceStep: priceStep,
-                        startTime: startTime,
-                        endTime: endTime,
-                        describe: describe,
-                        imgUrl: imgUrl,
-                        offer: offer,
-                        record: []
-                    }
-                }
-            }, (err, doc) => {
-                if (err) {
-                    resState(res, false, '发布失败')
-                    console.error(err)
-                } else {
-                    resState(res, true, '发布成功')
-                }
-            })
-        }
-        // 存在则更新
-        if (oldListInfo) {
-            updateList()
-        } else {
-            createList()
-        }
+
+    List.create({
+        _uid: uid,
+        type: type,
+        title: title,
+        postage: postage,
+        price: price,
+        priceStep: priceStep,
+        startTime: startTime,
+        endTime: endTime,
+        describe: describe,
+        imgUrl: imgUrl,
+        offer: offer
+    }).then((info) => {
+        if (info == null) throw info
+        return info
+    }).then((info) => {
+        // 更新当前用户List下商品信息
+        User.update({
+            _id: uid
+        }, {
+            $push: {
+                _list: info._id
+            }
+        }).exec((err, doc) => {
+            if (err) {
+                return console.log(err)
+            }
+            resState(res, true, '发布成功')
+        })
+    })
+    .catch((err) => {
+        console.log(err)
+        resState(res, false, '发布失败')
     })
 })
 

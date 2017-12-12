@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-01 14:46:30
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 11:55:16
+ * @Last Modified time: 2017-12-12 14:26:51
 */
 const express = require('express')
 const router = express.Router()
@@ -12,59 +12,80 @@ const ListModel = require('../model/list')
 const $getToken = require('../util/middleware/get_token')
 const resState = require('../util/resState')
 
+// 获取拍品详细信息
 router.post('/getDetailInfos', $getToken, (req, res) => {
     let { coinId, uid } = req.body
-    ListModel
-        .findOne({
-            'list._id': coinId
+    ListModel.findOne({
+        _id: coinId
+    }, {
+        _id: 0,
+        __v: 0
+    })
+    .exec((err, doc) => {
+        if (err) {
+            return console.log(err)
+        }
+        doc._doc.isLogin = true
+        doc._doc.showOffer = true
+        if (!uid) {
+            doc._doc.isLogin = false
+        }
+        if (doc._uid == uid) {
+            doc._doc.showOffer = false
+        }
+        delete doc._doc._uid
+        res.json({
+            result: doc,
+            success: true
         })
-        .exec((err, doc) => {
-            if (err) throw err
-            if (doc.length == 0) {
-                resState(res, false, '获取信息失败')
-            }
-            let listInfo = doc.list
-            let isLogin = true
-            let showOffer = true
-            // uid不存在
-            if (!uid) {
-                isLogin = false
-            }
-            // 当前用户进入自己发布商品详情页不展示报价相关按钮
-            if (doc._uid == uid) {
-                showOffer = false
-            }
-            // 由于取出来的是一条文档数据 需要额外匹配修改list值
-            for (let i = 0; i <= listInfo.length; i++) {
-                if (listInfo[i]._id == coinId) {
-                    let nowTime = new Date()
-                    if (listInfo[i].endTime <= nowTime && listInfo[i].state == 0) {
-                        console.log('竞拍已结束')
-                        updateState(doc)
+    })
+})
+
+// 拍品详情页报价
+router.post('/nowOffer', $token, (req, res) => {
+    let {uid, offer, userName, coinId} = req.body
+    let nowDate = new Date()
+    let nowDate2Time = nowDate.getTime()
+    // 批量更新数据
+    ListModel.bulkWrite([
+        {
+            updateMany: {
+                filter: {
+                    _id: coinId
+                },
+                update: {
+                    $push: {
+                        record: {
+                            name: userName,
+                            offerCreateDate: nowDate2Time,
+                            offer: offer,
+                            offerUid: uid
+                        }
+                    },
+                    $set: {
+                        offer: offer
                     }
-                    // 额外输出一些不存数据库的临时数据
-                    doc.list[i]._doc.isLogin = isLogin
-                    doc.list[i]._doc.showOffer = showOffer
-                    res.json({
-                        result: doc._doc.list[i],
-                        success: true
-                    })
-                    break
                 }
             }
-        })
-    // 更新拍品state
-    function updateState (doc) {
-        doc.list.map((item) => {
-            if (item._id == coinId) {
-                item.state = 1
-            }
-        })
-        doc.save((err) => {
-            if (err) throw err
-            console.log('state修改成功')
-        })
-    }
+        }
+    ]).then((handleResult) => {
+        if (handleResult.isOk()) {
+            res.json({
+                success: true,
+                result: {
+                    name: userName,
+                    offer: offer,
+                    offerCreateDate: nowDate,
+                    message: '报价成功'
+                }
+            })
+        } else {
+            res.json({
+                success: false,
+                message: '报价失败'
+            })
+        }
+    })
 })
 
 module.exports = router

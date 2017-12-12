@@ -2,7 +2,7 @@
  * @Author: chen_huang 
  * @Date: 2017-08-11 17:37:44 
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 17:46:04
+ * @Last Modified time: 2017-12-12 13:54:24
  * 拍卖详情页
  */
 <template>
@@ -34,17 +34,16 @@ export default {
                 result.endTime = convert8h(result.endTime)
                 console.log(result.record)
                 result.record.forEach((item) => {
-                    item.date = convert8h(item.date)
+                    item.offerCreateDate = convert8h(item.offerCreateDate)
                 })
 
                 this.remoteDetailData = result
             })
             .catch((err) => {
                 this.$message({
-                    message: '获取拍品信息失败',
+                    message: err,
                     type: 'error'
                 })
-                console.error(err)
             })
     },
 
