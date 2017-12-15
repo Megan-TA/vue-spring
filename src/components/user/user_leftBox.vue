@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:36:37
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 17:51:04
+ * @Last Modified time: 2017-12-13 12:13:55
  */
 <template>
     <div class='user__leftBox'>
@@ -17,7 +17,7 @@
             </el-tab-pane>
             <el-tab-pane label="发布管理" name='/user/auction/release'>
             </el-tab-pane>
-            <el-tab-pane label="信息管理" name='/user/userInfo/userInfo'>角色管理</el-tab-pane>
+            <el-tab-pane label="信息管理" name='/user/userInfo/userInfo'></el-tab-pane>
         </el-tabs>
     </div>
 </template>

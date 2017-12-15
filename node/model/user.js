@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 11:49:32
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 13:07:22
+ * @Last Modified time: 2017-12-13 12:11:04
  */
 const mongoose = require('mongoose')
 const db = require('./config')
@@ -26,6 +26,9 @@ const UserSchema = new Schema({
     token: {
         type: String
     },
+    address: [{
+        type: String
+    }],
     _list: [{
         type: Schema.Types.ObjectId,
         ref: 'list'

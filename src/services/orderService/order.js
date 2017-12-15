@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-12 14:41:08
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 16:15:30
+ * @Last Modified time: 2017-12-13 10:35:49
 */
 import xhr from 'services/xhr/promise'
 
@@ -17,6 +17,18 @@ class OrderService {
     payment (userData) {
         return xhr({
             url: '/api/order/payment',
+            data: userData
+        })
+    }
+    getAllOrder (userData) {
+        return xhr({
+            url: '/api/order/getAllOrder',
+            data: userData
+        })
+    }
+    getNopayOrder (userData) {
+        return xhr({
+            url: '/api/order/getNopayOrder',
             data: userData
         })
     }

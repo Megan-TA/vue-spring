@@ -3,43 +3,13 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:09:26
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 17:42:47
+ * @Last Modified time: 2017-12-14 17:15:54
  */
 <template>
    <div class="userOrder">
-        <el-tabs type="border-card" @tab-click='toggle'>
+        <el-tabs type="border-card" @tab-click='toggle' v-model='activeName'>
             <el-tab-pane label="全部" name='?state=1'>
-                <div class="userOrder__order userOrder--all">
-                    <ul v-for='(val, index) in remoteData' :key='index'>
-                        <li class='userOrder__list'>
-                            <el-row>
-                                <el-col :span='4' >
-                                    <img 
-                                        :src="`${remoteUrl}${val.imgUrl[0].url}`" 
-                                        alt="图片加载失败"
-                                        width="100">
-                                </el-col>
-                                <el-col :span='5' :offset="1">
-                                    <h4 class='userOder--title'>{{val.title}}</h4>
-                                </el-col>
-                                <el-col :span='4' :offset="1">
-                                    <p class='userOrder--price'>￥{{val.offer}}</p>
-                                </el-col>
-                                <el-col :span='4' :offset="1">
-                                    <p>---</p>
-                                </el-col>
-                                <el-col :span='4'>
-                                    <el-button 
-                                        type="primary" 
-                                        plain 
-                                        @click='pay(`${val._id}`, index)'
-                                        v-if='val.state==0'>立即付款</el-button>
-                                    <p v-if='val.state==1'>付款成功</p>
-                                </el-col>
-                            </el-row>
-                        </li>
-                    </ul>
-                </div>
+                <v-orderAll></v-orderAll>
             </el-tab-pane>
             <el-tab-pane label="待付款" name='?state=2'>
                 <v-noPay v-if='state == 2'></v-noPay>
@@ -47,12 +17,14 @@
             <el-tab-pane label="待发货" name='?state=3'>
                 <v-noSend v-if='state == 3'></v-noSend>
             </el-tab-pane>
-            <el-tab-pane label="待收货">待收货</el-tab-pane>
-            <el-tab-pane label="已完成">已完成</el-tab-pane>
-            <el-tab-pane label="冻结中">冻结中</el-tab-pane>
-            <el-tab-pane label="已关闭">已关闭</el-tab-pane>
-            <el-tab-pane label="退货中">退货中</el-tab-pane>
+            <el-tab-pane label="待收货" name='?state=4'>待收货</el-tab-pane>
+            <el-tab-pane label="退货中" name='?state=5'>已收货</el-tab-pane>
+            <el-tab-pane label="已完成" name='?state=6'>已完成</el-tab-pane>
+            <el-tab-pane label="退货中" name='?state=7'>退货中</el-tab-pane>
+            <el-tab-pane label="已关闭" name='?state=8'>已关闭</el-tab-pane>
+            
         </el-tabs>
+        <v-test></v-test>
        <!-- <ul class="userOrder__tab">
            <li class="active">
                <router-link to='?state=1'>全部</router-link>
@@ -82,30 +54,16 @@
    </div>
 </template>
 <script>
-import orderService from 'services/orderService/order'
 import noPay from './user_order--noPay'
 import noSend from './user_order--noSend'
+import orderAll from './user_order--all'
+import test from './test'
 export default {
     props: [],
 
-    created () {
-        orderService
-            .getOrder({})
-            .then((res) => {
-                console.log(res)
-                this.remoteData = res.result
-            })
-            .catch((err) => {
-                this.$message({
-                    message: '获取订单失败',
-                    type: 'error'
-                })
-                console.log(err)
-            })
-    },
-
     data () {
         return {
+            activeName: '?state=1',
             state: 0,
             remoteData: null,
             remoteUrl: process.env.LOCALNODEHOST
@@ -130,7 +88,9 @@ export default {
     },
     components: {
         'v-noPay': noPay,
-        'v-noSend': noSend
+        'v-noSend': noSend,
+        'v-orderAll': orderAll,
+        'v-test': test
     }
 }
 </script>
@@ -146,6 +106,11 @@ export default {
         font-size 14px
         color #999
         line-height 1.5
+    
+    .userOrder--noResult
+        height 100px
+        line-height 100px
+        text-align center
 
     .userOrder__tab
         display flex

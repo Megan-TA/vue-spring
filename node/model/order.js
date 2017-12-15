@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-12 14:03:02
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 17:22:15
+ * @Last Modified time: 2017-12-13 10:52:19
 */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -25,13 +25,15 @@ const OrderSchema = new Schema({
         require: true
     },
     // 运输状态
-    // 0 待发货
-    // 1 待收货
-    // 2 已收货
-    // 3 已完成
+    // 3 待发货
+    // 4 待收货
+    // 5 已收货
+    // 6 已完成
+    // 7 退货中
+    // 8 已关闭
     transportState: {
         type: Number,
-        default: 0
+        default: 3
     }
 })
 

@@ -3,10 +3,15 @@
  * @Author: chen_huang
  * @Date: 2017-12-12 17:02:19
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 17:51:12
+ * @Last Modified time: 2017-12-13 12:05:34
 */
 <template>
-    <div class="userOrder__order userOrder--nopay">
+    <div class='userOrder--noResult'
+        v-if='remoteData.length == 0'>
+        <p>没有数据</p>
+    </div>
+    <div v-else 
+        class="userOrder__order userOrder--nopay">
         <ul v-for='(val, index) in remoteData' :key='index'>
             <li class='userOrder__list'>
                 <el-row>
@@ -34,11 +39,7 @@
                                 index: index
                             })'
                             v-if='val.state==0'>立即付款</el-button>
-                         <el-button 
-                            type="success" 
-                            plain
-                            disabled
-                            v-if='val.state==1'>支付成功</el-button>
+                        <el-tag v-if='val.state==1'>已完成付款</el-tag>
                     </el-col>
                 </el-row>
             </li>
@@ -52,7 +53,9 @@ export default {
 
     created () {
         orderService
-            .getOrder({})
+            .getNopayOrder({
+                state: 0
+            })
             .then((res) => {
                 console.log(res)
                 this.remoteData = res.result
@@ -68,7 +71,7 @@ export default {
 
     data () {
         return {
-            remoteData: null,
+            remoteData: '',
             remoteUrl: process.env.LOCALNODEHOST
         }
     },

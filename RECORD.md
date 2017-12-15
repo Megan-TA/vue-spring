@@ -147,3 +147,23 @@ proxyTable: {
 1. element-ui验证使用async-valid库
 
 有个bug  在指定类型type='number' 在校验数字 始终不对
+
+> ### openssl 
+
+调用支付宝相关接口 需要签名 验签 等一系列稍微复杂的过程 
+
+支付宝又没有提供相关node的相关sdk 真的坑 需要自己手动去
+
+拼接参数 其中有个步骤是本地签名需要用Openssl 
+
+Openssl需要先安装ActiveState 后续官网下载Openssl
+
+详细参考相关链接第一点
+
+相关链接
+
+1. [windows下Openssl安装详解](http://blog.chinaunix.net/uid-20479991-id-216269.html)
+
+2. [node封装调用支付宝接口](http://blog.csdn.net/q3585914/article/details/72957548)
+
+3. [蚂蚁内部node调用支付宝接口案例](https://openclub.alipay.com/read.php?tid=2170&fid=69)

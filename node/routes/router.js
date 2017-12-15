@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:02:32
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 14:38:56
+ * @Last Modified time: 2017-12-15 16:36:39
  */
 const user = require('./user')
 const list = require('./list')
@@ -15,6 +15,9 @@ module.exports = (app) => {
         res.json({
             message: 'hello router'
         })
+    })
+    app.get('/index', (req, res) => {
+        res.render('index.ejs')
     })
     // 用户路由
     app.use('/api/user', user)
