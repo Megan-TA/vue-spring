@@ -3,17 +3,19 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:02:14
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 18:09:00
+ * @Last Modified time: 2017-12-18 16:33:58
  */
 <template>
     <div class="userRightBox">
-        <v-userOrder v-if="name == 'order'"></v-userOrder>
+        <v-userInOrder v-if="name == 'inOrder'"></v-userInOrder>
+        <v-userOutOrder v-if="name == 'outOrder'"></v-userOutOrder>
         <v-userInfo v-if="name == 'userInfo'"></v-userInfo>
         <v-release v-if="name == 'release'"></v-release>
     </div>
 </template>
 <script>
-import userOrder from './order/user_order'
+import userInOrder from './order/order-in/user_order'
+import userOutOrder from './order/order-out/user_order'
 import userInfo from './userInfo/user_info'
 import release from 'components/user/auction/user_release'
 export default {
@@ -31,7 +33,8 @@ export default {
         }
     },
     components: {
-        'v-userOrder': userOrder,
+        'v-userInOrder': userInOrder,
+        'v-userOutOrder': userOutOrder,
         'v-userInfo': userInfo,
         'v-release': release
     }

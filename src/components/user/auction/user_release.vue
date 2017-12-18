@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-07 00:36:07
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-07 17:41:32
+ * @Last Modified time: 2017-12-18 17:44:13
  */
 <template>
     <div id="release">
@@ -101,6 +101,7 @@ export default {
                 priceStep: '',
                 describe: '',
                 postage: '',
+                // 本地数组存放上传图片临时数据
                 imgUrl: [],
                 fileImgUrl: [],
                 labelOptions: [{
@@ -171,7 +172,7 @@ export default {
                     {required: true, message: '请输入拍卖时间'}
                 ],
                 imgUrl: [
-                    {type: 'array', required: true, message: '请上传至少一张拍品图片', trigger: 'change'}
+                    {type: 'array', required: true, message: '请上传至少一张拍品图片'}
                 ]
 
             }
@@ -179,7 +180,7 @@ export default {
     },
     methods: {
         beforeUpload (file) {
-            console.log(file)
+            // console.log(file)
         },
         // 上传文件移除的钩子
         handleRemove (file, fileList) {
@@ -196,6 +197,8 @@ export default {
             this.form.imgUrl.push({
                 url: res.imgUrl
             })
+            console.log(this.form.imgUrl)
+            console.log(this.form.fileImgUrl)
         },
         // date转startTime和endTime
         date2startend () {

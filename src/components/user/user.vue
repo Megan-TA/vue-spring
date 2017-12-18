@@ -3,13 +3,13 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 22:18:28
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-07 18:47:39
+ * @Last Modified time: 2017-12-18 16:28:27
  */
 <template>
     <div class="user">
         <v-headerTop></v-headerTop>
         <div class="user__container">
-            <v-userLeftBox></v-userLeftBox>
+            <v-userLeftBox :parentData='role'></v-userLeftBox>
             <router-view>
                 <v-userRightBox></v-userRightBox>
             </router-view>
@@ -20,13 +20,28 @@
 import headerTop from 'components/header/headerTop'
 import userLeftBox from './user_leftBox'
 import userRightBox from './user_rightBox'
+import userInfoService from 'services/user/userInfo/userInfo'
 export default {
+
+    created () {
+        userInfoService
+            .getUserRole({})
+            .then((res) => {
+                this.role = res.result.role
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+
     props: [],
+
     data () {
         return {
-
+            role: 'B'
         }
     },
+
     components: {
         'v-userLeftBox': userLeftBox,
         'v-userRightBox': userRightBox,

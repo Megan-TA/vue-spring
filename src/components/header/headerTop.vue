@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-07 14:22:11
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-08 13:25:21
+ * @Last Modified time: 2017-12-18 16:03:08
 */
 <template>
     <!-- 标题 start -->
@@ -17,7 +17,7 @@
                 <template v-if="userPhone">
                     <span>欢迎您：{{userPhone}}</span>
                     <span class="headerTop__userInfo--line">|</span>
-                    <router-link to = '/user/auction/release' class='headerTop--hover'>个人中心</router-link>
+                    <router-link to = '/user/order/inOrder?state=1' class='headerTop--hover'>个人中心</router-link>
                     <span class="headerTop__userInfo--line">|</span>
                     <span @click='logout' class="headerTop--hover">登出</span>
                 </template>

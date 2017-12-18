@@ -13,11 +13,11 @@ export default {
 
     methods: {
         test11 () {
-            axios.get('/api/order/test')
-              .then((res) => {
-                  console.log(res.data)
-                  location.href = res.data.url
-              })
+            axios.get('/api/order/payment')
+                .then((res) => {
+                    console.log(res.data)
+                    location.href = res.data.url
+                })
         }
     }
 }

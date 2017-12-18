@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-10-31 23:09:26
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-14 17:15:54
+ * @Last Modified time: 2017-12-18 16:49:25
  */
 <template>
    <div class="userOrder">
@@ -15,7 +15,7 @@
                 <v-noPay v-if='state == 2'></v-noPay>
             </el-tab-pane>
             <el-tab-pane label="待发货" name='?state=3'>
-                <v-noSend v-if='state == 3'></v-noSend>
+                <v-noPay v-if='state == 3'></v-noPay>
             </el-tab-pane>
             <el-tab-pane label="待收货" name='?state=4'>待收货</el-tab-pane>
             <el-tab-pane label="退货中" name='?state=5'>已收货</el-tab-pane>
@@ -24,40 +24,12 @@
             <el-tab-pane label="已关闭" name='?state=8'>已关闭</el-tab-pane>
             
         </el-tabs>
-        <v-test></v-test>
-       <!-- <ul class="userOrder__tab">
-           <li class="active">
-               <router-link to='?state=1'>全部</router-link>
-           </li>
-           <li>
-               <router-link to='?state=2'>待付款</router-link>
-           </li>
-           <li>
-               <router-link to='?state=3'>待发货</router-link>
-           </li>
-           <li>
-               <router-link to='?state=4'>待收货</router-link>
-           </li>
-           <li>
-               <router-link to='?state=5'>已完成</router-link>
-           </li>
-           <li>
-               <router-link to='?state=6'>冻结中</router-link>
-           </li>
-           <li>
-                <router-link to='?state=7'>已关闭</router-link>
-           </li>
-           <li>
-               <router-link to='?state=8'>退货中</router-link>
-           </li>
-       </ul> -->
    </div>
 </template>
 <script>
 import noPay from './user_order--noPay'
 import noSend from './user_order--noSend'
 import orderAll from './user_order--all'
-import test from './test'
 export default {
     props: [],
 
@@ -89,8 +61,7 @@ export default {
     components: {
         'v-noPay': noPay,
         'v-noSend': noSend,
-        'v-orderAll': orderAll,
-        'v-test': test
+        'v-orderAll': orderAll
     }
 }
 </script>
@@ -111,21 +82,6 @@ export default {
         height 100px
         line-height 100px
         text-align center
-
-    .userOrder__tab
-        display flex
-        border-bottom  1px solid #ddd
-        li
-            text-align center
-            height 35px 
-            line-height 35px
-            cursor pointer
-            a 
-                display block
-                padding 0 30px
-                &.router-link-exact-active
-                    box-shadow 0 1px 0 #f03231
-                    color #f03231
 
 
 </style>

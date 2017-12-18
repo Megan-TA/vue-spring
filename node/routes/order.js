@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-12 14:08:37
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-15 19:10:02
+ * @Last Modified time: 2017-12-18 17:54:38
 */
 const express = require('express')
 const router = express.Router()
@@ -12,10 +12,8 @@ const ListModel = require('../model/list')
 const $token = require('../util/middleware/check_token')
 const resState = require('../util/resState')
 let Alipay = require('../util/middleware/alipay/alipay')
-let axios = require('axios')
-let iconv = require('iconv-lite')
 
-const Alipayment = new Alipay({
+let Alipayment = new Alipay({
     APPID: '2016082600314118',
     URL: 'https://openapi.alipaydev.com/gateway.do'
 })
@@ -51,13 +49,13 @@ router.post('/getOrder', $token, (req, res) => {
         })
 })
 
-// 获取全部订单信息
-router.post('/getAllOrder', $token, (req, res) => {
+// 获取全部买入订单信息
+router.post('/getInAllOrder', $token, (req, res) => {
     let {uid} = req.body
     let nowDate = new Date()
     ListModel
         .find({
-            _uid: uid,
+            'record.offerUid': uid,
             endTime: {
                 '$lt': nowDate
             }
@@ -84,7 +82,7 @@ router.post('/getAllOrder', $token, (req, res) => {
 })
 
 // 获取待付款订单信息
-router.post('/getNopayOrder', $token, (req, res) => {
+router.post('/getInNopayOrder', $token, (req, res) => {
     let {uid} = req.body
     let nowDate = new Date()
     ListModel
@@ -117,7 +115,23 @@ router.post('/getNopayOrder', $token, (req, res) => {
 })
 
 // 付款
-router.post('/payment', $token, (req, res) => {
+router.all('/payment', $token, (req, res) => {
+    // let {_id, title, offer} = req.body._id
+    let alipayReturn = Alipayment.pcPay({
+        subject: 'as222222',
+        out_trade_no: Math.random(),
+        total_amount: 100.00
+    })
+    let tempUrl = `https://openapi.alipaydev.com/gateway.do?${alipayReturn}`
+
+    console.log(tempUrl)
+    res.json({
+        url: tempUrl
+    })
+})
+
+// 付款完成
+router.get('/payResult', $token, (req, res) => {
     let {uid, auctionId, offer, title, imgUrl} = req.body
     let createTime = new Date().getTime()
     OrderModel.create({
@@ -149,31 +163,52 @@ router.post('/payment', $token, (req, res) => {
         console.log(err)
     })
 })
+// ----------------卖出订单相关-----------------
+// 获取全部卖出订单信息
+router.post('/getOutAllOrder', $token, (req, res) => {
+    let {uid} = req.body
+    ListModel
+        .find({
+            _uid: uid,
+            state: 1
+        }, {
+            _uid: 0,
+            __v: 0,
+            describe: 0,
+            endTime: 0,
+            postage: 0,
+            price: 0,
+            priceStep: 0,
+            record: 0,
+            startTime: 0
+        })
+        .exec((err, doc) => {
+            if (err) {
+                return console.log(err)
+            }
+            res.json({
+                result: doc,
+                success: true
+            })
+        })
+})
 
-router.all('/test', (req, res) => {
-    let alipayReturn = Alipayment.pcPay({
-        body: 'test11',
-        subject: 'this is title',
-        out_trade_no: '201503200101010222',
-        total_amount: 88.88
+router.all('/paynotify', (req, res) => {
+    res.render('test', {
+        result: '111'
     })
-    let tempUrl = `https://openapi.alipaydev.com/gateway.do?${alipayReturn}`
-
-    console.log(tempUrl)
-    res.json({
-        url: tempUrl
-    })
-    // axios.get(tempUrl)
-    //     .then((alipayRes) => {
-    //         if (alipayRes instanceof Object && alipayRes.status == 200 && alipayRes.statusText == 'OK') {
-    //             let htmlString = alipayRes.data
-    //             htmlString = iconv.decode(htmlString, 'utf8')
-    //             res.render('test.ejs', {
-    //                 result: htmlString
-    //             })
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err)
-    //     })
+})
+router.get('/payreturn', (req, res) => {
+    // 返回验签是否通过
+    let state = Alipayment.signVerify(req)
+    if (state) {
+        res.render('test', {
+            result: '222'
+        })
+    } else {
+        res.render('test', {
+            result: '非法'
+        })
+    }
 })
 module.exports = router

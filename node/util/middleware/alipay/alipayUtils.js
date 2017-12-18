@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-12-14 15:36:17
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-15 17:17:27
+ * @Last Modified time: 2017-12-18 12:41:20
 */
 let crypto = require('crypto')
 let qs = require('querystring')
@@ -58,20 +58,20 @@ class AlipayUtils {
     }
     /**
      * 对从支付宝返回过来的数据做验证 以识别身份真假
-     * str 要验证的字符串
      * sign 要验证的签名
      * publicKey 支付宝公钥
      * @memberof AlipayUtils
      */
-    signVerify (str, sign, publicKey, signType) {
+    signVerify (str, sign, aliPublicKey, signType) {
         let createSign
+        if (!signType) signType = 'RSA2'
         if (signType == 'RSA2') {
-            createSign = crypto.createSign('RSA-SHA256')
+            createSign = crypto.createVerify('RSA-SHA256')
         } else {
-            createSign = crypto.createSign('RSA-SHA1')
+            createSign = crypto.createVerify('RSA-SHA1')
         }
         createSign.update(str, 'utf-8')
-        return createSign.verify(publicKey, sign, 'base64')
+        return createSign.verify(aliPublicKey, sign, 'base64')
     }
 
 }

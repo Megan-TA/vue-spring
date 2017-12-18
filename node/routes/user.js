@@ -3,7 +3,7 @@
  * @Author: chen_huang
  * @Date: 2017-11-11 12:06:20
  * @Last Modified by: chen_huang
- * @Last Modified time: 2017-12-12 10:40:53
+ * @Last Modified time: 2017-12-18 17:05:46
  */
 const express = require('express')
 const router = express.Router()
@@ -84,19 +84,29 @@ router.post('/login', (req, res) => {
 })
 // 退出
 router.post('/logout', $token, (req, res) => {
-    let ObjectID = req.body.ObjectID
+    let uid = req.body.uid
     res.json({
         success: true,
-        ObjectID: ObjectID
+        ObjectID: uid
     })
 })
-
-router.post('/info', $token, (req, res) => {
-    let ObjectID = req.body.ObjectID
-    res.json({
-        success: true,
-        ObjectID: ObjectID
-    })
+// 查询用户基本信息
+router.post('/getUserRole', $token, (req, res) => {
+    let uid = req.body.uid
+    User
+        .findOne({
+            _id: uid
+        }, {
+            _id: 0,
+            role: 1
+        })
+        .exec((err, doc) => {
+            if (err) throw err
+            res.json({
+                result: doc,
+                success: true
+            })
+        })
 })
 
 // 发布商品
@@ -168,6 +178,25 @@ router.post('/getUserInfo', $token, (req, res) => {
         '_id': uid
     })
     .select('userPhone')
+    .exec((err, doc) => {
+        if (err) throw err
+        res.json({
+            result: doc,
+            success: true
+        })
+    })
+})
+
+// 申请成为卖家
+router.post('/applyForB', $token, (req, res) => {
+    let { uid } = req.body
+    User.findOneAndUpdate({
+        '_id': uid
+    }, {
+        $set: {
+            role: 'B'
+        }
+    })
     .exec((err, doc) => {
         if (err) throw err
         res.json({
